@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23428837399759188}
   - component: {fileID: 114994682243145306}
   - component: {fileID: 114429933918346484}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Obstacle2
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f689b921d20b0ee4fb34b1abd4d2696f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curPrefab: {fileID: 0}
   movespeed: 0.1
 --- !u!135 &135575381185838302
 SphereCollider:

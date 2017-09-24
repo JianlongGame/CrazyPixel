@@ -4,57 +4,69 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     [SerializeField] float m_laneDistance;
+    [SerializeField] float m_jumpHeight;
     [SerializeField] float m_moveSpeed;
-    [SerializeField] float m_attackSpeed;
-    private Vector3 m_TargetPosition;
+    private Vector3 m_targetPosition;
 
     // Use this for initialization
     void Start() {
-        m_TargetPosition = transform.position;
+        m_targetPosition = transform.position;
+        Physics.gravity = new Vector3(0, -10.0f, 0);
     }
 
     // Update is called once per frame
     void Update() {
-        // Player is currently changing lanes
-        if (!transform.position.Equals(m_TargetPosition)) {
-            ChangeLanes();
+        Move();
+        CheckInput();
+    }
+
+    // Collision detection
+    void OnTriggerEnter(Collider other) {
+        // Player collided with an object
+        if (other.gameObject.tag == "Obstacle") {
+            Destroy(gameObject);
         }
-        else {
-            CheckInput();
+        // Player collided with the ground
+        else if (other.gameObject.tag == "Ground") {
+            transform.position = new Vector3(transform.position.x, 0.625f, transform.position.z);
+            m_targetPosition = transform.position;
         }
     }
 
     // Move the player towards their target position
-    void ChangeLanes() {
+    void Move() {
         float move = m_moveSpeed * Time.deltaTime;
-        transform.position = Vector3.MoveTowards(transform.position, m_TargetPosition, move);
+        transform.position = Vector3.MoveTowards(transform.position, m_targetPosition, move);
     }
 
-    // Check if the player should move
+    // 
     void CheckInput() {
         // Move left
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             if (transform.position.x > -m_laneDistance) {
-                m_TargetPosition = transform.position - new Vector3(m_laneDistance, 0, 0);
+                m_targetPosition = transform.position - new Vector3(m_laneDistance, 0, 0);
             }
         }
         // Move right
         else if (Input.GetKeyDown(KeyCode.RightArrow)) {
             if (transform.position.x < m_laneDistance) {
-                m_TargetPosition = transform.position + new Vector3(m_laneDistance, 0, 0);
+                m_targetPosition = transform.position + new Vector3(m_laneDistance, 0, 0);
             }
         }
-        // Attack left
-        else if (Input.GetKeyDown(KeyCode.A)) {
-
+        // Jump
+        else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+            if (transform.position.x < m_laneDistance) {
+                m_targetPosition = transform.position + new Vector3(0, m_jumpHeight, 0);
+            }
         }
-        // Attack middle
-        else if (Input.GetKeyDown(KeyCode.S)) {
-
-        }
-        // Attack right
-        else if (Input.GetKeyDown(KeyCode.D)) {
-
+        // Attack
+        else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            // Check for destroyable objects in player attack range
+            Vector3 size = GetComponent<Renderer>().bounds.size;
+            Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size.x, size.y, 1.25f), Quaternion.identity, 1 << 11);
+            foreach (Collider c in colliders) {
+                Destroy(c.gameObject);
+            }
         }
     }
 }

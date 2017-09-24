@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23659005386948510}
   - component: {fileID: 114364642622449274}
   - component: {fileID: 114328820908409664}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Obstacle1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -118,5 +118,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f689b921d20b0ee4fb34b1abd4d2696f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curPrefab: {fileID: 0}
   movespeed: 0.1
