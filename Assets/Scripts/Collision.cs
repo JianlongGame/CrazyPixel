@@ -13,4 +13,10 @@ public class Collision : MonoBehaviour {
 	void Update () {
 		
 	}
+
+	void OnTriggerEnter( Collider other ){
+		if(other.gameObject.tag == "Obstacle"){
+			Destroy (gameObject);
+		}
+	}
 }
