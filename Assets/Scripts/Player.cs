@@ -55,9 +55,7 @@ public class Player : MonoBehaviour {
         }
         // Jump
         else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            if (transform.position.x < m_laneDistance) {
                 m_targetPosition = transform.position + new Vector3(0, m_jumpHeight, 0);
-            }
         }
         // Attack
         else if (Input.GetKeyDown(KeyCode.DownArrow)) {
