@@ -13,7 +13,10 @@ public class TimeDestroy : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        if (gameObject.transform.position.z <= -20f)
+        {
+            DestroyObject();
+        }
 	}
 
 	void DestroyObject ()
