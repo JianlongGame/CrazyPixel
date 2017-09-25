@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class TimeDestroy : MonoBehaviour {
 
-	public float LifeTime = 10f;
+	//public float LifeTime = 10f;
 
 	// Use this for initialization
-	void Start () {
+	/*void Start () {
 		Invoke ("DestroyObject", LifeTime);
-	}
+	}*/
 	
 	// Update is called once per frame
 	void Update () {
         if (gameObject.transform.position.z <= -20f)
         {
-            DestroyObject();
+			Destroy (gameObject);
         }
 	}
 
-	void DestroyObject ()
+	/*void DestroyObject ()
 	{
 		Destroy (gameObject);
-	}
+	}*/
 }
