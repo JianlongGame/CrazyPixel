@@ -66,5 +66,7 @@ MonoBehaviour:
   - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
   - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
   m_GameOverText: {fileID: 0}
+  m_Player: {fileID: 0}
   map: []
   speed: 0.1
+  isGameOver: 0

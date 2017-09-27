@@ -32,15 +32,6 @@ public class GroundTrans : MonoBehaviour {
         obstacles = new List<GameObject>(obs);
     }
 
-    public void SetSpeed(float speed)
-    {
-        GetComponent<Scrolling>().movespeed = speed;
-        foreach (Scrolling obs in transform.GetComponentsInChildren<Scrolling>())
-        {
-            obs.movespeed = speed;
-        }
-    }
-
     void Start () {
         x = transform.position.x;
         y = transform.position.y;
