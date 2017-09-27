@@ -7,6 +7,7 @@ public class Player : MonoBehaviour {
     [SerializeField] float m_moveSpeed;
     [SerializeField] float m_jumpSpeed;
     public delegate void OnGameOver();
+    public bool m_playerIsDead;
 
     int m_currentLane;
     int m_targetLane;
@@ -19,17 +20,22 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
+        m_playerIsDead = false;
         m_currentLane = m_targetLane = 1;
         transform.position = m_Lanes[m_currentLane];
     }
 
     // Update is called once per frame
     void Update() {
-        if (m_currentLane != m_targetLane) {
-            Move();
-        }
-        else {
-            CheckInput();
+        if (!m_playerIsDead) {
+            if (m_currentLane != m_targetLane)
+            {
+                Move();
+            }
+            else
+            {
+                CheckInput();
+            }
         }
     }
 
@@ -38,6 +44,7 @@ public class Player : MonoBehaviour {
         // Player collided with an object
         if (other.gameObject.tag == "Obstacle") {
             m_OnGameOver();
+            m_playerIsDead = true;
         }
         // Player collided with the ground
         else if (other.gameObject.tag == "Ground") {
@@ -56,7 +63,6 @@ public class Player : MonoBehaviour {
         }
     }
 
-    // 
     void CheckInput() {
         // Move left
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
