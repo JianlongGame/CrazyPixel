@@ -106,7 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f689b921d20b0ee4fb34b1abd4d2696f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curPrefab: {fileID: 1621355967866152}
   movespeed: 0.1
 --- !u!114 &114924001644931518
 MonoBehaviour:
@@ -119,4 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beede787c17fb7e4d8e1867f35fb330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curGnd: {fileID: 1621355967866152}
+  obstacles: []
+  spawnPos: []
+  obstacleX: []
+  spawnX: []
+  newPos: 0
+  lastPos: 0

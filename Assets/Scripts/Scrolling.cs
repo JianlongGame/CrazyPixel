@@ -14,5 +14,4 @@ public class Scrolling : MonoBehaviour {
     {
         transform.Translate(0, 0, -movespeed);
     }
-	
 }

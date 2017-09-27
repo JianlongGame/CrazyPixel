@@ -6,8 +6,16 @@ public class Player : MonoBehaviour {
     [SerializeField] Vector3[] m_Lanes;
     [SerializeField] float m_moveSpeed;
     [SerializeField] float m_jumpSpeed;
+    public delegate void OnGameOver();
+
     int m_currentLane;
-    private int m_targetLane;
+    int m_targetLane;
+    OnGameOver m_OnGameOver;
+
+    public void SetOnGameOver(OnGameOver cb)
+    {
+        m_OnGameOver = cb;
+    }
 
     // Use this for initialization
     void Start() {
@@ -29,7 +37,7 @@ public class Player : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         // Player collided with an object
         if (other.gameObject.tag == "Obstacle") {
-            Destroy(gameObject);
+            m_OnGameOver();
         }
         // Player collided with the ground
         else if (other.gameObject.tag == "Ground") {
