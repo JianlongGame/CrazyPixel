@@ -2,52 +2,53 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+    [SerializeField] TouchListener m_TouchListener;
     [SerializeField] Vector3[] m_Lanes;
     [SerializeField] float m_moveSpeed;
     [SerializeField] float m_jumpSpeed;
-    public delegate void OnGameOver();
-    public bool m_playerIsDead;
 
+    public delegate void OnGameOver();
     int m_currentLane;
     int m_targetLane;
+    bool m_IsDead;
     OnGameOver m_OnGameOver;
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (m_currentLane != m_targetLane && !m_IsDead)
+        {
+            Move();
+        }
+    }
 
     public void SetOnGameOver(OnGameOver cb)
     {
         m_OnGameOver = cb;
     }
 
-    // Use this for initialization
-    void Start() {
-        m_playerIsDead = false;
+    public void Init()
+    {
+        m_IsDead = false;
         m_currentLane = m_targetLane = 1;
         transform.position = m_Lanes[m_currentLane];
-    }
-
-    // Update is called once per frame
-    void Update() {
-        if (!m_playerIsDead) {
-            if (m_currentLane != m_targetLane)
-            {
-                Move();
-            }
-            else
-            {
-                CheckInput();
-            }
-        }
+        m_TouchListener.AddOnTouchCallback(OnTouch);
     }
 
     // Collision detection
-    void OnTriggerEnter(Collider other) {
+    void OnTriggerEnter(Collider other)
+    {
         // Player collided with an object
-        if (other.gameObject.tag == "Obstacle") {
+        if (other.gameObject.tag == "Obstacle")
+        {
             m_OnGameOver();
-            m_playerIsDead = true;
+            m_IsDead = true;
         }
         // Player collided with the ground
-        else if (other.gameObject.tag == "Ground") {
+        else if (other.gameObject.tag == "Ground")
+        {
             transform.position = m_Lanes[m_currentLane];
             GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             GetComponent<Rigidbody>().isKinematic = true;
@@ -55,40 +56,44 @@ public class Player : MonoBehaviour {
     }
 
     // Move the player towards their target position
-    void Move() {
+    void Move()
+    {
         float move = m_moveSpeed * Time.deltaTime;
         transform.position = Vector3.MoveTowards(transform.position, m_Lanes[m_targetLane], move);
-        if (transform.position.Equals(m_Lanes[m_targetLane])) {
+        if (transform.position.Equals(m_Lanes[m_targetLane]))
+        {
             m_currentLane = m_targetLane;
         }
     }
 
-    void CheckInput() {
-        // Move left
-        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            if (m_currentLane > 0) {
-                m_targetLane = m_currentLane - 1;
-            }
-        }
-        // Move right
-        else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            if (m_currentLane < m_Lanes.Length - 1) {
-                m_targetLane = m_currentLane + 1;
-            }
-        }
-        // Jump
-        else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-            if (transform.position.y == 0.625) {
-                GetComponent<Rigidbody>().AddForce(new Vector3(0.0f, 1.0f, 0.0f) * m_jumpSpeed, ForceMode.Impulse);
-            }
-        }
-        // Attack
-        else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-            // Check for destroyable objects in player attack range
-            Vector3 size = GetComponent<Renderer>().bounds.size;
-            Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size.x, size.y, 1.25f), Quaternion.identity, 1 << 11);
-            foreach (Collider c in colliders) {
-                Destroy(c.gameObject);
+    void OnTouch(MyTouch touch)
+    {
+        if (m_currentLane == m_targetLane && !m_IsDead)
+        {
+            switch (touch.type)
+            {
+                // Attack
+                case TouchType.Tap:
+                    Vector3 size = GetComponent<Renderer>().bounds.size;
+                    Collider[] colliders = Physics.OverlapBox(transform.position, new Vector3(size.x, size.y, 1.25f), Quaternion.identity, 1 << 11);
+                    foreach (Collider c in colliders)
+                        Destroy(c.gameObject);
+                    break;
+                // Move left
+                case TouchType.SwipeLeft:
+                    if (m_currentLane > 0)
+                        m_targetLane = m_currentLane - 1;
+                    break;
+                // Move right
+                case TouchType.SwipeRight:
+                    if (m_currentLane < m_Lanes.Length - 1)
+                        m_targetLane = m_currentLane + 1;
+                    break;
+                // Jump
+                case TouchType.SwipeUp:
+                    if (transform.position.y == 0.625)
+                        GetComponent<Rigidbody>().AddForce(Vector3.up * m_jumpSpeed, ForceMode.Impulse);
+                    break;
             }
         }
     }

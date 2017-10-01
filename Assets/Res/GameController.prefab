@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7755adba03c69c44ae1fff3eda0a0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayerPrefab: {fileID: 114526244226740632, guid: b4c13fc838937434582a09b2603588d2,
-    type: 2}
+  m_TouchListener: {fileID: 0}
+  m_Player: {fileID: 0}
   m_GroundPrefab: {fileID: 114285800346970754, guid: a3eb5b4d887f934419eb49f529f0d268,
     type: 2}
   m_ArchPrefab: {fileID: 114420431579942238, guid: 15c300149eb729242b981e6874eb986d,
@@ -66,7 +66,7 @@ MonoBehaviour:
   - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
   - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
   m_GameOverText: {fileID: 0}
-  m_Player: {fileID: 0}
+  deathMenu: {fileID: 0}
   map: []
-  speed: 0.1
+  speed: 0.01
   isGameOver: 0
