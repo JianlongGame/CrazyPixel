@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Collision : MonoBehaviour {
+public class DeathMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -15,13 +15,11 @@ public class Collision : MonoBehaviour {
 		
 	}
 
-	//public GameObject menu;
+	public void ToggleEndMenu(){
+		gameObject.SetActive (true);
+	}
 
-	void OnTriggerEnter( Collider other ){
-		if(other.gameObject.tag == "Obstacle"){
-			Destroy (gameObject);
-			SceneManager.LoadScene(0);
-			//menu.SetActive (true);
-		}
+	public void LoadsMainMenu(int sceneIndex){
+		SceneManager.LoadScene (sceneIndex);
 	}
 }
