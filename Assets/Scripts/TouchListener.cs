@@ -48,6 +48,54 @@ public class TouchListener : MonoBehaviour
 
     void Update()
     {
+        // USE KEYBOARD CONTROLS
+        if (SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            CheckKeyInput();
+        }
+        // USE TOUCH SCREEN CONTROLS
+        else if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            CheckTouchInput();
+        }
+    }
+
+    void CheckKeyInput()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            MyTouch touch = new MyTouch();
+            touch.type = TouchType.SwipeLeft;
+            m_OnTouch(touch);
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            MyTouch touch = new MyTouch();
+            touch.type = TouchType.SwipeRight;
+            m_OnTouch(touch);
+        }
+        else if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            MyTouch touch = new MyTouch();
+            touch.type = TouchType.SwipeUp;
+            m_OnTouch(touch);
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MyTouch touch = new MyTouch();
+            touch.type = TouchType.SwipeDown;
+            m_OnTouch(touch);
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            MyTouch touch = new MyTouch();
+            touch.type = TouchType.Tap;
+            m_OnTouch(touch);
+        }
+    }
+
+    void CheckTouchInput()
+    {
         foreach (Touch touch in Input.touches)
         {
             switch (touch.phase)
