@@ -36,7 +36,7 @@ public class TouchListener : MonoBehaviour
 {
     public delegate void OnTouch(MyTouch touch);
 
-    private float minSwipeDist = 200.0f;
+    private float minSwipeDist = 100.0f;
     private float maxSwipeTime = 0.5f;
     private MyTouch t = new MyTouch();
     OnTouch m_OnTouch;
@@ -48,10 +48,10 @@ public class TouchListener : MonoBehaviour
 
     void Update()
     {
-        // USE KEYBOARD CONTROLS
+        // USE MOUSE CONTROLS
         if (SystemInfo.deviceType == DeviceType.Desktop)
         {
-            CheckKeyInput();
+            CheckMouseInput();
         }
         // USE TOUCH SCREEN CONTROLS
         else if (SystemInfo.deviceType == DeviceType.Handheld)
@@ -60,37 +60,43 @@ public class TouchListener : MonoBehaviour
         }
     }
 
-    void CheckKeyInput()
+    void CheckMouseInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetMouseButtonDown(0))
         {
-            MyTouch touch = new MyTouch();
-            touch.type = TouchType.SwipeLeft;
-            m_OnTouch(touch);
+            t.startTime = Time.time;
+            t.startLoc = Input.mousePosition;
+            t.type = TouchType.None;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetMouseButtonUp(0))
         {
-            MyTouch touch = new MyTouch();
-            touch.type = TouchType.SwipeRight;
-            m_OnTouch(touch);
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            MyTouch touch = new MyTouch();
-            touch.type = TouchType.SwipeUp;
-            m_OnTouch(touch);
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            MyTouch touch = new MyTouch();
-            touch.type = TouchType.SwipeDown;
-            m_OnTouch(touch);
-        }
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            MyTouch touch = new MyTouch();
-            touch.type = TouchType.Tap;
-            m_OnTouch(touch);
+            t.endTime = Time.time;
+            t.endLoc = Input.mousePosition;
+
+            // User swiped the screen
+            if (t.time < maxSwipeTime && t.distance > minSwipeDist)
+            {
+                // Horizontal swipe
+                if (Mathf.Abs(t.direction.x) > Mathf.Abs(t.direction.y))
+                {
+                    Vector2 swipeType = Vector2.right * Mathf.Sign(t.direction.x);
+                    t.type = swipeType.x > 0.0f ? TouchType.SwipeRight : TouchType.SwipeLeft;
+                }
+                // Vertical swipe
+                else
+                {
+                    Vector2 swipeType = Vector2.up * Mathf.Sign(t.direction.y);
+                    t.type = swipeType.y > 0.0f ? TouchType.SwipeUp : TouchType.SwipeDown;
+                }
+            }
+            // User tapped the screen
+            else
+            {
+                t.type = TouchType.Tap;
+            }
+
+            if (t.type != TouchType.None && m_OnTouch != null)
+                m_OnTouch(t);
         }
     }
 
@@ -100,30 +106,35 @@ public class TouchListener : MonoBehaviour
         {
             switch (touch.phase)
             {
+                // User touched the screen
                 case TouchPhase.Began:
                     t.startTime = Time.time;
                     t.startLoc = touch.position;
                     t.type = TouchType.None;
                     break;
 
+                // User lifted their finger off screen
                 case TouchPhase.Ended:
                     t.endTime = Time.time;
                     t.endLoc = touch.position;
 
+                    // User swiped the screen
                     if (t.time < maxSwipeTime && t.distance > minSwipeDist)
                     {
-                        Vector2 swipeType = Vector2.zero;
-
+                        // Horizontal swipe
                         if (Mathf.Abs(t.direction.x) > Mathf.Abs(t.direction.y))
-                            swipeType = Vector2.right * Mathf.Sign(t.direction.x);
-                        else
-                            swipeType = Vector2.up * Mathf.Sign(t.direction.y);
-
-                        if (swipeType.x != 0.0f)
+                        {
+                            Vector2 swipeType = Vector2.right * Mathf.Sign(t.direction.x);
                             t.type = swipeType.x > 0.0f ? TouchType.SwipeRight : TouchType.SwipeLeft;
-                        if (swipeType.y != 0.0f)
+                        }
+                        // Vertical swipe
+                        else
+                        {
+                            Vector2 swipeType = Vector2.up * Mathf.Sign(t.direction.y);
                             t.type = swipeType.y > 0.0f ? TouchType.SwipeUp : TouchType.SwipeDown;
+                        }
                     }
+                    // User tapped the screen
                     else
                     {
                         t.type = TouchType.Tap;
@@ -131,7 +142,7 @@ public class TouchListener : MonoBehaviour
                     break;
             }
 
-            if (t.type != TouchType.None)
+            if (t.type != TouchType.None && m_OnTouch != null)
                 m_OnTouch(t);
         }
     }

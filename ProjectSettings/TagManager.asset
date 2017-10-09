@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Obstacle
   - Ground
+  - Yellow
+  - Blue
+  - Red
   layers:
   - Default
   - TransparentFX
@@ -15,10 +18,10 @@ TagManager:
   - UI
   - 
   - 
-  - Player
-  - Ground
-  - Obstacle
-  - Destroyable
+  - Yellow
+  - Red
+  - Blue
+  - 
   - 
   - 
   - 

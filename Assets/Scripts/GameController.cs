@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] Player m_Player;
     [SerializeField] GroundTrans m_GroundPrefab;
     [SerializeField] Scrolling m_ArchPrefab;
     [SerializeField] Material[] m_Materials;
@@ -40,8 +39,6 @@ public class GameController : MonoBehaviour
 
         isGameOver = false;
         m_GameOverText.gameObject.SetActive(false);
-        m_Player.Init();
-        m_Player.SetOnGameOver(OnGameOver);
         CreateMap();
         SetSpeed(speed);
     }
