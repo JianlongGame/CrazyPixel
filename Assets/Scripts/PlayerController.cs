@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     // Control player swap
     void OnTouch(MyTouch touch)
     {
-        float laneWidth = Screen.width / 3f;
+        float laneWidth = Screen.width / m_PlayerObjects.Length;
         int selectedLane = (int)(touch.startLoc.x / laneWidth);
 
         switch (touch.type)
