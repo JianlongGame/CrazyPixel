@@ -4,7 +4,6 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] TouchListener m_TouchListener;
     [SerializeField] Player[] m_PlayerObjects;
-    [SerializeField] GameObject[] m_Lanes;
 
     // Use this for initialization
     void Start()
@@ -15,7 +14,7 @@ public class PlayerController : MonoBehaviour
     // Control player swap
     void OnTouch(MyTouch touch)
     {
-        float laneWidth = Screen.width / 3f;
+        float laneWidth = Screen.width / m_PlayerObjects.Length;
         int selectedLane = (int)(touch.startLoc.x / laneWidth);
 
         switch (touch.type)
@@ -31,7 +30,7 @@ public class PlayerController : MonoBehaviour
                 break;
             // Move right
             case TouchType.SwipeRight:
-                if (selectedLane < m_Lanes.Length - 1)
+                if (selectedLane < m_PlayerObjects.Length - 1)
                 {
                     m_PlayerObjects[selectedLane].MoveTo(1);
                     m_PlayerObjects[selectedLane + 1].MoveTo(-1);
