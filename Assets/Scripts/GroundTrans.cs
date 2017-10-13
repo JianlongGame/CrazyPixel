@@ -3,16 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTrans : MonoBehaviour {
-    private float x;
-    private float y;
-
-	//public List<GameObject> obstacles = new List<GameObject>();
-	public List<Transform> spawnPos = new List<Transform>();
-	//public List<float> obstacleX = new List<float>();
-	//public List<float> spawnX = new List<float>();
-	public int newPos, lastPos;
-
-
 	public List<GameObject> obstacles = new List<GameObject>();
 	public List<float> lanePos = new List<float>();
 	private float nowTime, posX, posZ;
@@ -20,10 +10,6 @@ public class GroundTrans : MonoBehaviour {
 	private GameObject prefab, lastObs, tempObs;
 	private List<float> xTempList = new List<float>();
 	private List<GameObject> obsTempList = new List<GameObject>();
-
-
-	//public Transform spawnPos;
-	//public GameObject obstacle1;
 
     public void SetPos(Vector3 pos)
     {
@@ -46,74 +32,15 @@ public class GroundTrans : MonoBehaviour {
     }
 
     void Start () {
-        x = transform.position.x;
-        y = transform.position.y;
-		//obstacleX.Add (-1.5f);
-		//obstacleX.Add (1.5f);
-		//obstacleX.Add (0f);
-		newPos = 0;
-		lastPos = 0;
-		//setObstacle ();
-		//initObstacle();
-
 		initObs ();
-
     }
 
     // Update is called once per frame
     void Update () {
-        /*if (transform.position.z <= -20f)
-        {
-            transform.position = new Vector3(x, y, 40f);
-			newPos += 1;
-        }
-
-		if (lastPos != newPos)
-		{
-			lastPos = newPos;
-			//setObstacle ();
-		}*/
-
 		if (lastObs.transform.position.z < 40) {
 			setObs ();
 		}
     }
-
-	/*void setObstacle() {
-		foreach( Transform pos in spawnPos){
-			spawnX.Clear ();
-			int obsNumX = Random.Range (0, 2) + 1;
-			while (obsNumX > 0) {
-				float temp = obstacleX [Random.Range (0, 3)];
-				if (!spawnX.Contains(temp)) {
-					spawnX.Add(temp);
-					obsNumX--;
-				}
-			}
-			foreach (float posX in spawnX) {
-				GameObject prefab = obstacles [Random.Range (0, 2)];
-				pos.position = new Vector3 (posX, pos.position.y, pos.position.z);
-				GameObject newObstacle = Instantiate (prefab, pos.position, prefab.transform.rotation);
-                newObstacle.transform.parent = transform;
-			}
-		}
-	}*/
-
-	/*void initObstacle(){
-		/*int numOfObstacles = (int)(Time.time/10)+1;
-		if (numOfObstacles > 3) {
-			numOfObstacles = 3;
-		}*/
-
-		//spawnPos.position = new 
-		/*Vector3 pos = new Vector3(0,0.75f,0);
-		for(int i=0; i*2<40; i++){
-			pos = new Vector3(0,0.13f,(i*2f));
-			GameObject newObstacle = Instantiate (obstacles[2], pos, obstacles[2].transform.rotation);
-			newObstacle.transform.parent = transform;
-		}
-
-	}*/
 
 	void initObs(){
 		for (int i = 0; i < 15; i++) {
@@ -135,6 +62,7 @@ public class GroundTrans : MonoBehaviour {
 		}
 	}
 
+	// only one obstacle in one row
 	void firstLevel(){
 		prefab = obstacles [Random.Range (0, 3)];
 		posX = lanePos [Random.Range (0, 3)];
@@ -143,6 +71,7 @@ public class GroundTrans : MonoBehaviour {
 		lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
 	}
 
+	// two different color obstacles in one row
 	void secLevel(){
 		xTempList.Clear ();
 		obsTempList.Clear ();
@@ -159,6 +88,7 @@ public class GroundTrans : MonoBehaviour {
 		}
 	}
 
+	// three different color obstacles in one row
 	void thrLevel(){
 		xTempList.Clear ();
 		obsTempList.Clear ();
