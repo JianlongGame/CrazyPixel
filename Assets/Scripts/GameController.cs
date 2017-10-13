@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     [SerializeField] Text m_GameOverText;
 
     public DeathMenu deathMenu;
-    public float speed = 0.1f;
+    public float speed = 0.001f;
     public bool isGameOver;
 
     // Use this for initialization
