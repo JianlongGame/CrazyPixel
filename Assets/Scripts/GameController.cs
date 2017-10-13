@@ -56,9 +56,9 @@ public class GameController : MonoBehaviour
     void CreateMap()
     {
         map = new List<GameObject>();
-        AddGround(new Vector3(0, 0, 20), new Vector3(5, 1, 20), m_Materials[0], m_Obstacles);
-        AddGround(new Vector3(0, 0, 0), new Vector3(5, 1, 20), m_Materials[1], m_Obstacles);
-        AddGround(new Vector3(0, 0, -20), new Vector3(5, 1, 20), m_Materials[2], m_Obstacles);
+        //AddGround(new Vector3(0, 0, 20), new Vector3(5, 1, 20), m_Materials[0], m_Obstacles);
+        //AddGround(new Vector3(0, 0, 0), new Vector3(5, 1, 20), m_Materials[1], m_Obstacles);
+        //AddGround(new Vector3(0, 0, -20), new Vector3(5, 1, 20), m_Materials[2], m_Obstacles);
 
         Scrolling arch = Instantiate<Scrolling>(m_ArchPrefab);
         arch.transform.parent = transform;
