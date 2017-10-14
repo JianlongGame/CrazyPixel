@@ -12,7 +12,7 @@ public class Scrolling : MonoBehaviour {
     void Update()
     {
         transform.Translate(0, 0, -movespeed);
-		if (transform.position.z <= -15f)
+		if (transform.position.z <= -9f)
 		{
 			Destroy (gameObject);
 		}

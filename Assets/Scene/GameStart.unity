@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 889687632}
-  m_IndirectSpecularColor: {r: 0.4477653, g: 0.49774414, b: 0.5754189, a: 1}
+  m_IndirectSpecularColor: {r: 0.4477648, g: 0.4977439, b: 0.57541883, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -260,7 +260,8 @@ Prefab:
       propertyPath: m_LifeImages.Array.data[2]
       value: 
       objectReference: {fileID: 900838841}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114330517726116782, guid: 24545febf80e72947acdfd815669357b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 24545febf80e72947acdfd815669357b, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &539490660
@@ -435,30 +436,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &727961099 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1622294313884242, guid: 24545febf80e72947acdfd815669357b,
-    type: 2}
-  m_PrefabInternal: {fileID: 481212295}
---- !u!114 &727961100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 727961099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: beede787c17fb7e4d8e1867f35fb330a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacles:
-  - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
-  - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
-  - {fileID: 1596848654505824, guid: b7fb05430b43947adab017169d63713c, type: 2}
-  lanePos:
-  - -1
-  - 0
-  - 1
 --- !u!114 &727961101 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114804308128661876, guid: 24545febf80e72947acdfd815669357b,
@@ -647,20 +624,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 0, y: 0}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -835,11 +798,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 18.476, y: 0, z: 0}
---- !u!1 &1523638775 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1031321653864436, guid: 975364c00898563499355180d3cc0245,
-    type: 2}
-  m_PrefabInternal: {fileID: 2056069976}
 --- !u!1001 &1639283981
 Prefab:
   m_ObjectHideFlags: 0
@@ -1063,6 +1021,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1857491498038566, guid: 08be617e7255bc84c9b10810915ce82f, type: 2}
+      propertyPath: m_Name
+      value: GroundTrans
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 08be617e7255bc84c9b10810915ce82f, type: 2}
   m_IsPrefabParent: 0
@@ -1105,17 +1067,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114794143953077452, guid: 975364c00898563499355180d3cc0245,
-        type: 2}
-      propertyPath: m_Lanes.Array.data[0]
-      value: 
-      objectReference: {fileID: 1523638775}
-    - target: {fileID: 114794143953077452, guid: 975364c00898563499355180d3cc0245,
-        type: 2}
-      propertyPath: m_TouchListener
-      value: 
-      objectReference: {fileID: 1639283982}
-    - target: {fileID: 114453550062998756, guid: 975364c00898563499355180d3cc0245,
+    - target: {fileID: 114197883005964708, guid: 975364c00898563499355180d3cc0245,
         type: 2}
       propertyPath: m_GameController
       value: 
@@ -1125,11 +1077,16 @@ Prefab:
       propertyPath: m_GameController
       value: 
       objectReference: {fileID: 727961101}
-    - target: {fileID: 114197883005964708, guid: 975364c00898563499355180d3cc0245,
+    - target: {fileID: 114453550062998756, guid: 975364c00898563499355180d3cc0245,
         type: 2}
       propertyPath: m_GameController
       value: 
       objectReference: {fileID: 727961101}
+    - target: {fileID: 114794143953077452, guid: 975364c00898563499355180d3cc0245,
+        type: 2}
+      propertyPath: m_TouchListener
+      value: 
+      objectReference: {fileID: 1639283982}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 975364c00898563499355180d3cc0245, type: 2}
   m_IsPrefabParent: 0
