@@ -5,7 +5,7 @@ using UnityEngine;
 public class GroundTrans : MonoBehaviour {
 	public List<GameObject> obstacles = new List<GameObject>();
 	public List<float> lanePos = new List<float>();
-	private float startTime, nowTime, posX, posZ;
+	private float startTime, nowTime, snapshot, posX, posZ;
 	private Vector3 pos;
 	private GameObject prefab, lastObs, tempObs;
 	private List<float> xTempList = new List<float>();
@@ -13,6 +13,7 @@ public class GroundTrans : MonoBehaviour {
     public static bool doSpawn = true;
     void Start () {
         Debug.Log("Start");
+        Scrolling.movespeed = 0.08f;
         startTime = Time.time;
         initObs ();
         
@@ -27,13 +28,7 @@ public class GroundTrans : MonoBehaviour {
     }
 
 	void initObs(){
-        /*
-		for (int i = 0; i < 15; i++) {
-			prefab = obstacles [Random.Range (0, 3)];
-			posX = lanePos [Random.Range (0, 3)];
-			pos = new Vector3 (posX, 0.13f, (posZ + i*20f));
-			lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
-		}*/
+
         prefab = obstacles[Random.Range(0, 3)];
         posX = lanePos[Random.Range(0, 3)];
         pos = new Vector3(posX, 0.13f, (posZ + 0 * 20f));
@@ -43,22 +38,28 @@ public class GroundTrans : MonoBehaviour {
 	void setObs (){
 		nowTime = Time.time - startTime;
         int levelCode = 0;
-		if (nowTime >= 15 && nowTime < 30) {
-            levelCode = (int)Random.Range(0, 2);
-		} else if (nowTime >= 30) {
+		if (nowTime >= 10 && nowTime < 30) {
             levelCode = (int)Random.Range(0, 3);
+		} else if (nowTime >= 30) {
+            if (Scrolling.movespeed <= 0.2f && nowTime - snapshot > 20)
+            {
+                Scrolling.movespeed += 0.02f;
+                snapshot = nowTime;
+            } 
+            levelCode = (int)Random.Range(0, 4);
 		}
-
+        
         setLevels(levelCode);
 	}
+
 
     private void setLevels(int levelCode)
     {
         if (levelCode == 0) {
             firstLevel();
-        } else if (levelCode == 1) {
+        } else if (levelCode >= 1 && levelCode <= 2) {
             secLevel();
-        } else if (levelCode == 2){
+        } else if (levelCode == 3){
             thrLevel();
         }
     }

@@ -73,13 +73,5 @@ public class GameController : MonoBehaviour
         isGameOver = true;
         deathMenu.ToggleEndMenu();  //show the death button when the player died
     }
-
-    // Set the speed of the game
-    void SetSpeed(float spd)
-    {
-        foreach (Scrolling s in transform.GetComponentsInChildren<Scrolling>())
-        {
-            s.movespeed = spd;
-        }
-    }
+   
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Scrolling : MonoBehaviour {
-    public float movespeed = 0.05f;
+    public static float movespeed = 0.05f;
     public static bool gameOver = true;
 	void Start () {
     }
