@@ -36,5 +36,8 @@ public class Player : MonoBehaviour
     // Player collided with an object (Jay)
     void OnTriggerEnter(Collider other)
     {
+		if(other.gameObject.tag != gameObject.name){  //wrong color
+			m_GameController.LoseOneLife ();
+		}
     }
 }

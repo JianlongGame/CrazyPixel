@@ -5,10 +5,12 @@ public class GameController : MonoBehaviour
 {
     [SerializeField] GameObject[] m_Obstacles;
     [SerializeField] Text m_GameOverText;
+	[SerializeField] Image[] m_LifeImages;
 
     public DeathMenu deathMenu;
     public float speed = 0.001f;
     public bool isGameOver;
+	public int lifeCount;
 
     // Use this for initialization
     void Start()
@@ -32,7 +34,18 @@ public class GameController : MonoBehaviour
         isGameOver = false;
         m_GameOverText.gameObject.SetActive(false);
         SetSpeed(speed);
+		lifeCount = 3;
     }
+
+	public void LoseOneLife()
+	{
+		lifeCount--;
+		m_LifeImages[lifeCount].gameObject.SetActive (false);
+		if (lifeCount == 0) 
+		{
+			OnGameOver ();
+		}
+	}
 
     // Player has died
     void OnGameOver()
