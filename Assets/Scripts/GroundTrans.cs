@@ -1,18 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundTrans : MonoBehaviour {
 	public List<GameObject> obstacles = new List<GameObject>();
-	public List<GameObject> lanes = new List<GameObject>();
+	public List<float> lanePos = new List<float>();
 	private float nowTime, posX, posZ;
 	private Vector3 pos;
 	private GameObject prefab, lastObs, tempObs;
 	private List<float> xTempList = new List<float>();
 	private List<GameObject> obsTempList = new List<GameObject>();
-
+    
     void Start () {
-		initObs ();
+        initObs ();
+        
     }
 
     // Update is called once per frame
@@ -23,53 +24,65 @@ public class GroundTrans : MonoBehaviour {
     }
 
 	void initObs(){
+        /*
 		for (int i = 0; i < 15; i++) {
-			prefab = obstacles[Random.Range(0, obstacles.Count)];
-            int lane = Random.Range(0, lanes.Count);
-            posX = lanes[lane].transform.position.x;
-			pos = new Vector3 (posX, 0.13f, (posZ + i*4f));
+			prefab = obstacles [Random.Range (0, 3)];
+			posX = lanePos [Random.Range (0, 3)];
+			pos = new Vector3 (posX, 0.13f, (posZ + i*20f));
 			lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
-            lastObs.transform.parent = lanes[lane].transform;
-		}
-	}
+		}*/
+        prefab = obstacles[Random.Range(0, 3)];
+        posX = lanePos[Random.Range(0, 3)];
+        pos = new Vector3(posX, 0.13f, (posZ + 0 * 20f));
+        lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
+    }
 
 	void setObs (){
 		nowTime = Time.time;
-		if (nowTime < 15) {
-			firstLevel ();
-		} else if (nowTime >= 15 && nowTime < 30) {
-			secLevel ();
-		} else {
-			thrLevel ();
+        int levelCode = 0;
+		if (nowTime >= 15 && nowTime < 30) {
+            levelCode = (int)Random.Range(0, 2);
+		} else if (nowTime >= 30) {
+            levelCode = (int)Random.Range(0, 3);
 		}
+
+        setLevels(levelCode);
 	}
+
+    private void setLevels(int levelCode)
+    {
+        if (levelCode == 0) {
+            firstLevel();
+        } else if (levelCode == 1) {
+            secLevel();
+        } else if (levelCode == 2){
+            thrLevel();
+        }
+    }
 
 	// only one obstacle in one row
 	void firstLevel(){
-        prefab = obstacles[Random.Range(0, obstacles.Count)];
-        int lane = Random.Range(0, lanes.Count);
-        posX = lanes[lane].transform.position.x;
-		posZ = lastObs.transform.position.z + 4;
-		pos = new Vector3(posX, 0.13f, posZ);
+		prefab = obstacles [Random.Range (0, 3)];
+		posX = lanePos [Random.Range (0, 3)];
+		posZ = lastObs.transform.position.z + 20;
+		pos = new Vector3 (posX, 0.13f, posZ);
 		lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
-        lastObs.transform.parent = lanes[lane].transform;
-	}
+
+    }
 
 	// two different color obstacles in one row
 	void secLevel(){
 		xTempList.Clear ();
 		obsTempList.Clear ();
-		xTempList = new List<float> (lanes.Select(x => x.transform.position.x));
+		xTempList = new List<float> (lanePos);
 		obsTempList = new List<GameObject> (obstacles);
-		posZ = lastObs.transform.position.z + 4;
+		posZ = lastObs.transform.position.z + 20;
 		for (int j = 0; j < 2; j++) {
-            int lane = Random.Range(0, xTempList.Count);
-            posX = xTempList [lane];
+			posX = xTempList [Random.Range (0, xTempList.Count)];
 			prefab = obsTempList [Random.Range (0, obsTempList.Count)];
 			pos = new Vector3 (posX, 0.13f, posZ);
 			lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
-            lastObs.transform.SetParent(lanes[lane].transform);
-            xTempList.Remove (posX);
+			xTempList.Remove (posX);
 			obsTempList.Remove (prefab);
 		}
 	}
@@ -78,16 +91,15 @@ public class GroundTrans : MonoBehaviour {
 	void thrLevel(){
 		xTempList.Clear ();
 		obsTempList.Clear ();
-		xTempList = new List<float> (lanes.Select(x => x.transform.position.x));
+		xTempList = new List<float> (lanePos);
 		obsTempList = new List<GameObject> (obstacles);
 		for (int j = 0; j < 3; j++) {
-            int lane = Random.Range(0, xTempList.Count);
-            posX = xTempList[lane];
-            prefab = obsTempList [j];
+			posX = xTempList [Random.Range (0, xTempList.Count)];
+			prefab = obsTempList [j];
 			pos = new Vector3 (posX, 0.13f, posZ);
-            lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
-            lastObs.transform.parent = lanes[lane].transform;
-            xTempList.Remove (posX);
+			lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
+			xTempList.Remove (posX);
 		}
 	}
+
 }

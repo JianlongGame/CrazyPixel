@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 135575381185838302}
   - component: {fileID: 23428837399759188}
   - component: {fileID: 114994682243145306}
-  - component: {fileID: 54322459227560448}
+  - component: {fileID: 54783477472762820}
   m_Layer: 11
   m_Name: Obstacle2
-  m_TagString: Yellow
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -57,7 +57,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9577e8eac68b8bb48a835ac7125377e9, type: 2}
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,7 +83,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282997401910622}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54322459227560448
+--- !u!54 &54783477472762820
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -117,7 +117,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282997401910622}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
