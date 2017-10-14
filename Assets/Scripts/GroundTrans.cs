@@ -5,20 +5,23 @@ using UnityEngine;
 public class GroundTrans : MonoBehaviour {
 	public List<GameObject> obstacles = new List<GameObject>();
 	public List<float> lanePos = new List<float>();
-	private float nowTime, posX, posZ;
+	private float startTime, nowTime, posX, posZ;
 	private Vector3 pos;
 	private GameObject prefab, lastObs, tempObs;
 	private List<float> xTempList = new List<float>();
 	private List<GameObject> obsTempList = new List<GameObject>();
-    
+    public static bool doSpawn = true;
     void Start () {
+        Debug.Log("Start");
+        startTime = Time.time;
         initObs ();
         
     }
 
     // Update is called once per frame
     void Update () {
-		if (lastObs.transform.position.z < 40) {
+     
+		if (doSpawn && lastObs.transform.position.z < 40) {
 			setObs ();
 		}
     }
@@ -38,7 +41,7 @@ public class GroundTrans : MonoBehaviour {
     }
 
 	void setObs (){
-		nowTime = Time.time;
+		nowTime = Time.time - startTime;
         int levelCode = 0;
 		if (nowTime >= 15 && nowTime < 30) {
             levelCode = (int)Random.Range(0, 2);

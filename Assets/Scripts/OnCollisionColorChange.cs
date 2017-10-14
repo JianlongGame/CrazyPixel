@@ -28,13 +28,11 @@ public class OnCollisionColorChange : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Collide");
         ground.GetComponent<Renderer>().material.color = other.gameObject.GetComponent<Renderer>().material.color;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit");
         ground.GetComponent<Renderer>().material.color = orginColor;
     }
 }

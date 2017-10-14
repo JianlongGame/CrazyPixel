@@ -36,5 +36,21 @@ public class Player : MonoBehaviour
     // Player collided with an object (Jay)
     void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.GetComponent<Renderer>().material.color !=
+            gameObject.GetComponent<Renderer>().material.color)
+        {
+            lock(GameController.thisLock)
+            {
+                m_GameController.loseOneLife();
+
+            }
+        } else
+        {
+            lock (GameController.thisLock)
+            {
+                m_GameController.winOneLife();
+
+            }
+        }
     }
 }

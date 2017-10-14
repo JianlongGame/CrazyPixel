@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Scrolling : MonoBehaviour {
     public float movespeed = 0.05f;
-
+    public static bool gameOver = true;
 	void Start () {
     }
 
@@ -12,7 +12,7 @@ public class Scrolling : MonoBehaviour {
     void Update()
     {
         transform.Translate(0, 0, -movespeed);
-		if (transform.position.z <= -15f)
+		if (gameOver || transform.position.z <= -15f)
 		{
 			Destroy (gameObject);
 		}
