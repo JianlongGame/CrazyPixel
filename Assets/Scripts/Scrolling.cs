@@ -5,16 +5,24 @@ using UnityEngine;
 public class Scrolling : MonoBehaviour {
     public static float movespeed = 0.05f;
     public static bool gameOver = true;
+
+	private GameController GC;
+
 	void Start () {
+		GC = GameObject.Find ("GameController").GetComponent<GameController> ();
     }
 
     // Update is called once per frame
     void Update()
-    {
-        transform.Translate(0, 0, -movespeed);
-		if (gameOver || transform.position.z <= -15f)
+	{
+		if (GC.CounterDownDone == true) 
 		{
-			Destroy (gameObject);
+			transform.Translate(0, 0, -movespeed);
+			if (gameOver || transform.position.z <= -15f)
+			{
+				Destroy (gameObject);
+			}
 		}
+        
     }
 }

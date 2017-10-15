@@ -11,6 +11,7 @@ public class GroundTrans : MonoBehaviour {
 	private List<float> xTempList = new List<float>();
 	private List<GameObject> obsTempList = new List<GameObject>();
     public static bool doSpawn = true;
+
     void Start () {
         Debug.Log("Start");
         Scrolling.movespeed = 0.08f;
@@ -21,7 +22,6 @@ public class GroundTrans : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-     
 		if (doSpawn && lastObs.transform.position.z < 40) {
 			setObs ();
 		}

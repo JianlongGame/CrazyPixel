@@ -9,7 +9,9 @@ public class GameController : MonoBehaviour
     [SerializeField] GameObject[] m_Obstacles;
     [SerializeField] Text m_GameOverText;
     [SerializeField] Image[] m_LifeImages;
+	[SerializeField] Image[] m_CountDownImages;
 
+	public bool CounterDownDone = false;
     public DeathMenu deathMenu;
     public float speed = 0.001f;
     public bool isGameOver;
@@ -18,7 +20,19 @@ public class GameController : MonoBehaviour
     void Start()
     {
         StartGame();
+
     }
+
+	void Update()
+	{
+		if (CounterDownDone == true) 
+		{
+			m_CountDownImages[0].gameObject.SetActive(false);
+			m_CountDownImages[1].gameObject.SetActive(false);
+			m_CountDownImages[2].gameObject.SetActive(false);
+			m_CountDownImages[3].gameObject.SetActive(false);
+		}
+	}
 
     // Delete the previous game
     void ClearGame()
