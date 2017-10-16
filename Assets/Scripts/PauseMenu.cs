@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class DeathMenu : MonoBehaviour {
+public class PauseMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
 		gameObject.SetActive (false);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
-	public void ToggleEndMenu(){
+	public void TogglePauseMenu(){
 		gameObject.SetActive (true);
 	}
 
-	public void CloseEndMenu(){
+	public void ClosePauseMenu(){
 		gameObject.SetActive (false);
 	}
 
-	public void LoadsMainMenu(int sceneIndex){
-		SceneManager.LoadScene (sceneIndex);
-	}
+//	public void LoadsMainMenu(int sceneIndex){
+//		SceneManager.LoadScene (sceneIndex);
+//	}
 }

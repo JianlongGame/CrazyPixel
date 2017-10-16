@@ -13,8 +13,10 @@ public class GameController : MonoBehaviour
 
 	public bool CounterDownDone = false;
     public DeathMenu deathMenu;
+	public PauseMenu pauseMenu;
     public float speed = 0.001f;
     public bool isGameOver;
+	public bool isGamePause;
     public int lifeCount;
     // Use this for initialization
     void Start()
@@ -50,6 +52,7 @@ public class GameController : MonoBehaviour
     {
         ClearGame();
         isGameOver = false;
+		isGamePause = false;
         Scrolling.gameOver = false;
         GroundTrans.doSpawn = true;
         m_GameOverText.gameObject.SetActive(false);
@@ -88,4 +91,17 @@ public class GameController : MonoBehaviour
         deathMenu.ToggleEndMenu();  //show the death button when the player died
     }
    
+	public void PauseGame()
+	{
+		isGamePause = true;
+		pauseMenu.TogglePauseMenu(); 
+		deathMenu.ToggleEndMenu();
+	}
+
+	public void ContinueGame()
+	{
+		isGamePause = false;
+		pauseMenu.ClosePauseMenu(); 
+		deathMenu.CloseEndMenu();
+	}
 }
