@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 889687632}
-  m_IndirectSpecularColor: {r: 0.4477648, g: 0.4977439, b: 0.57541883, a: 1}
+  m_IndirectSpecularColor: {r: 0.44776452, g: 0.4977435, b: 0.57541806, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beede787c17fb7e4d8e1867f35fb330a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles:
+  obsShape:
   - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
   - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
   - {fileID: 1596848654505824, guid: b7fb05430b43947adab017169d63713c, type: 2}
@@ -889,6 +889,17 @@ MonoBehaviour:
   - -1
   - 0
   - 1
+  obsColor:
+  - {fileID: 2100000, guid: 2ee0bce255434b64bac67cb6a890714c, type: 2}
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+  - {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
+  mergePos:
+  - 0.5
+  - -0.5
+  merColor:
+  - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
+  - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
+  - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
 --- !u!114 &727961101 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114804308128661876, guid: 24545febf80e72947acdfd815669357b,
