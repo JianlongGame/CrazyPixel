@@ -1,15 +1,33 @@
 ﻿using UnityEngine;
 
+public enum PlayerColors
+{
+    Red,        // 0
+    Yellow,     // 1
+    Blue,       // 2
+    Orange,     // 3
+    Purple,     // 4
+    Green,      // 5
+    White,      // 6
+}
+
 public class Player : MonoBehaviour
 {
     [SerializeField] GameController m_GameController;
     [SerializeField] float m_moveSpeed;
+    [SerializeField] Material[] m_colors;
+
+    public string origColor;
+    public bool isFused;
+    public Player fusedObject;
     Vector3 m_targetLoc;
 
     // Initialize the player
     void Start()
     {
         m_targetLoc = transform.position;
+        isFused = false;
+        fusedObject = null;
     }
 
     void Update()
@@ -21,9 +39,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void MoveTo(int direction)
+    public void MoveTo(float direction)
     {
         m_targetLoc = new Vector3(transform.position.x + direction, transform.position.y, transform.position.z);
+    }
+
+    public void Fuse(bool fused, string color)
+    {
+        isFused = fused;
+        gameObject.layer = LayerMask.NameToLayer(color);
+        gameObject.GetComponent<MeshRenderer>().material = m_colors[(int)System.Enum.Parse(typeof(PlayerColors), color)];
+    }
+
+    public string GetColor()
+    {
+        return LayerMask.LayerToName(gameObject.layer);
     }
 
     // Move the player towards their target position
@@ -33,23 +63,21 @@ public class Player : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, m_targetLoc, move);
     }
 
-    // Player collided with an object (Jay)
+    // Player collided with an object
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Renderer>().material.color !=
-            gameObject.GetComponent<Renderer>().material.color)
+        if (other.gameObject.GetComponent<Renderer>().material.color != gameObject.GetComponent<Renderer>().material.color)
         {
             lock(GameController.thisLock)
             {
                 m_GameController.loseOneLife();
-
             }
-        } else
+        }
+        else
         {
             lock (GameController.thisLock)
             {
                 m_GameController.winOneLife();
-
             }
         }
     }

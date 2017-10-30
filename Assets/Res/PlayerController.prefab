@@ -305,6 +305,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
   m_moveSpeed: 10
+  m_colors:
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+  - {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
+  - {fileID: 2100000, guid: 2ee0bce255434b64bac67cb6a890714c, type: 2}
+  - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
+  - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
+  - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
+  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  origColor: Blue
+  isFused: 0
+  fusedObject: {fileID: 0}
 --- !u!114 &114317585932813632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,6 +329,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
   m_moveSpeed: 10
+  m_colors:
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+  - {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
+  - {fileID: 2100000, guid: 2ee0bce255434b64bac67cb6a890714c, type: 2}
+  - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
+  - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
+  - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
+  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  origColor: Yellow
+  isFused: 0
+  fusedObject: {fileID: 0}
 --- !u!114 &114453550062998756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,6 +353,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
   m_moveSpeed: 10
+  m_colors:
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+  - {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
+  - {fileID: 2100000, guid: 2ee0bce255434b64bac67cb6a890714c, type: 2}
+  - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
+  - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
+  - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
+  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  origColor: Red
+  isFused: 0
+  fusedObject: {fileID: 0}
 --- !u!114 &114794143953077452
 MonoBehaviour:
   m_ObjectHideFlags: 1
