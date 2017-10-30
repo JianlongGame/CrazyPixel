@@ -39,6 +39,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public string GetColor()
+    {
+        return LayerMask.LayerToName(gameObject.layer);
+    }
+
     public void MoveTo(float direction)
     {
         m_targetLoc = new Vector3(transform.position.x + direction, transform.position.y, transform.position.z);
@@ -49,11 +54,10 @@ public class Player : MonoBehaviour
         isFused = fused;
         gameObject.layer = LayerMask.NameToLayer(color);
         gameObject.GetComponent<MeshRenderer>().material = m_colors[(int)System.Enum.Parse(typeof(PlayerColors), color)];
-    }
-
-    public string GetColor()
-    {
-        return LayerMask.LayerToName(gameObject.layer);
+        if (fused)
+            gameObject.transform.localScale = new Vector3(0.5f, 0.25f, 0.25f);
+        else
+            gameObject.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
     }
 
     // Move the player towards their target position

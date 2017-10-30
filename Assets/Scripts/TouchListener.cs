@@ -117,7 +117,7 @@ public class TouchListener : MonoBehaviour
         {
             t.startTime = Time.time;
             t.startLoc = new Vector3(Screen.width / 2f, 0, 0);
-            t.endLoc = new Vector3(Screen.width - 1, 0, 0);
+            t.endLoc = new Vector3(Screen.width - 100f, 0, 0);
             t.type = TouchType.Pinch;
             m_OnTouch(t);
         }

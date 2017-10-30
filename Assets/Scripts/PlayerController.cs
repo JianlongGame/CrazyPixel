@@ -4,18 +4,24 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] TouchListener m_TouchListener;
     [SerializeField] Player[] m_PlayerObjects;
+    float lastTouchTime;
 
     // Use this for initialization
     void Start()
     {
+        lastTouchTime = Time.time;
         m_TouchListener.AddOnTouchCallback(OnTouch);
     }
 
     // Control player
     void OnTouch(MyTouch touch)
     {
+        if (touch.startTime - lastTouchTime < 0.1)
+            return;
+
         float laneWidth = Screen.width / m_PlayerObjects.Length;
         int player = (int)(touch.startLoc.x / laneWidth);
+        lastTouchTime = touch.startTime;
 
         switch (touch.type)
         {
@@ -32,6 +38,9 @@ public class PlayerController : MonoBehaviour
             // Fuse or unfuse colors
             case TouchType.Pinch:
                 int player2 = (int)(touch.endLoc.x / laneWidth);
+                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
+                    return;
+
                 Player p1 = m_PlayerObjects[player];
                 Player p2 = m_PlayerObjects[player2];
                 if (!p1.isFused && !p2.isFused)

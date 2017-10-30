@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_PressedColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1688,6 +1688,32 @@ Prefab:
       propertyPath: m_GameController
       value: 
       objectReference: {fileID: 727961101}
+    - target: {fileID: 4922050437734958, guid: 975364c00898563499355180d3cc0245, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163559084375164, guid: 975364c00898563499355180d3cc0245, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922050437734958, guid: 975364c00898563499355180d3cc0245, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163559084375164, guid: 975364c00898563499355180d3cc0245, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 23969643501630718, guid: 975364c00898563499355180d3cc0245,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+    - target: {fileID: 23200880962823980, guid: 975364c00898563499355180d3cc0245,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 975364c00898563499355180d3cc0245, type: 2}
   m_IsPrefabParent: 0
