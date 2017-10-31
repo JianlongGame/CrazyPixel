@@ -313,9 +313,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
   - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  m_shapes:
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   origColor: Blue
   isFused: 0
-  fusedObject: {fileID: 0}
 --- !u!114 &114317585932813632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,9 +340,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
   - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  m_shapes:
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   origColor: Yellow
   isFused: 0
-  fusedObject: {fileID: 0}
 --- !u!114 &114453550062998756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -361,9 +367,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
   - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
+  m_shapes:
+  - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
   origColor: Red
   isFused: 0
-  fusedObject: {fileID: 0}
 --- !u!114 &114794143953077452
 MonoBehaviour:
   m_ObjectHideFlags: 1

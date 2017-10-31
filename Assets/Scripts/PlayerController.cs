@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
 
         switch (touch.type)
         {
+            // Change shape
+            case TouchType.Tap:
+                m_PlayerObjects[player].ChangeShape();
+                break;
+
             // Move left
             case TouchType.SwipeLeft:
                 SwapLeft(player);
@@ -38,11 +43,11 @@ public class PlayerController : MonoBehaviour
             // Fuse or unfuse colors
             case TouchType.Pinch:
                 int player2 = (int)(touch.endLoc.x / laneWidth);
-                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
-                    return;
-
                 Player p1 = m_PlayerObjects[player];
                 Player p2 = m_PlayerObjects[player2];
+
+                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
+                    return;
                 if (!p1.isFused && !p2.isFused)
                     FuseColors(p1, p2);
                 else if (p1.isFused && p2.isFused)
