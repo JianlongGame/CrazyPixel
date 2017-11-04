@@ -89,7 +89,7 @@ public class Player : MonoBehaviour
     // Player collided with an object
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Renderer>().material.color != gameObject.GetComponent<Renderer>().material.color)
+        if (other.gameObject.GetComponent<Renderer>().material.color != gameObject.GetComponent<Renderer>().material.color) //wrong colour
         {
             lock(GameController.thisLock)
             {

@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
 	public bool CounterDownDone = false;
     public DeathMenu deathMenu;
 	public PauseMenu pauseMenu;
+	public Button pauseButton;
     public float speed = 0.001f;
     public bool isGameOver;
 	public bool isGamePause;
@@ -95,6 +96,7 @@ public class GameController : MonoBehaviour
 	{
 		isGamePause = true;
 		pauseMenu.TogglePauseMenu(); 
+		pauseButton.gameObject.SetActive (false);  //hide pause button
 		//deathMenu.ToggleEndMenu();
 	}
 
@@ -102,6 +104,7 @@ public class GameController : MonoBehaviour
 	{
 		isGamePause = false;
 		pauseMenu.ClosePauseMenu(); 
+		pauseButton.gameObject.SetActive (true); //show pause button
 		//deathMenu.CloseEndMenu();
 	}
 }
