@@ -95,13 +95,13 @@ public class GameController : MonoBehaviour
 	{
 		isGamePause = true;
 		pauseMenu.TogglePauseMenu(); 
-		deathMenu.ToggleEndMenu();
+		//deathMenu.ToggleEndMenu();
 	}
 
 	public void ContinueGame()
 	{
 		isGamePause = false;
 		pauseMenu.ClosePauseMenu(); 
-		deathMenu.CloseEndMenu();
+		//deathMenu.CloseEndMenu();
 	}
 }
