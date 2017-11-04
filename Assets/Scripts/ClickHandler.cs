@@ -30,4 +30,8 @@ public class ClickHandler : MonoBehaviour {
 	public void MainMenuOnClick(int sceneIndex){
 		SceneManager.LoadScene (sceneIndex);
 	}
+
+	public void RestartOnClick(int sceneIndex){
+		SceneManager.LoadScene (sceneIndex);
+	}
 }
