@@ -132,13 +132,13 @@ public class GroundTrans : MonoBehaviour {
 		prefab = obsShape [Random.Range (0, 3)];
 		posX = mergePos [Random.Range (0, 2)];
 		posZ = lastObs.transform.position.z + 20;
-		pos = new Vector3 (posX, 0.13f*2, posZ);
+		pos = new Vector3 (posX, 0.13f*4, posZ);
 		lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
 		lastObs.GetComponent<Renderer> ().material = merColor [Random.Range (0, 3)];
 		t1 = lastObs.transform.localScale.x;
 		t2 = lastObs.transform.localScale.y;
 		t3 = lastObs.transform.localScale.z;
-		lastObs.transform.localScale = new Vector3 (t1*2, t2*2, t3*2);
+		lastObs.transform.localScale = new Vector3 (t1*4, t2*4, t3*4);
 	}
 
 }

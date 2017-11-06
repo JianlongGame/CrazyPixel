@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
     Vector3 m_targetLoc;
     int curShape;
 
+
     // Initialize the player
     void Start()
     {
@@ -45,6 +46,15 @@ public class Player : MonoBehaviour
         {
             Move();
         }
+			
+//		if (Input.GetKeyDown (KeyCode.Q)) 
+//		{
+//			energy.CurrentVal -= 10;
+//		}
+//		if (Input.GetKeyDown (KeyCode.W)) 
+//		{
+//			energy.CurrentVal += 10;
+//		}
     }
 
     public string GetColor()
@@ -95,14 +105,17 @@ public class Player : MonoBehaviour
             {
                 m_GameController.loseOneLife();
             }
+
         }
         else
         {
 			if (other.gameObject.GetComponent<MeshFilter> ().mesh.name == gameObject.GetComponent<MeshFilter> ().mesh.name) {
 				lock (GameController.thisLock)
 				{
+					m_GameController.rightShape();
 					m_GameController.winOneLife();
 				}
+
 			}
             lock (GameController.thisLock)
             {

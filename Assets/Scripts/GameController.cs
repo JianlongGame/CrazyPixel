@@ -19,11 +19,20 @@ public class GameController : MonoBehaviour
     public bool isGameOver;
 	public bool isGamePause;
     public int lifeCount;
+
+	[SerializeField] private Stat energy;
+	private const float coef = 1.0f;
+	[SerializeField] public bool checkShape;
+
+	private void Awake()
+	{
+		energy.Initialize ();
+	}
+
     // Use this for initialization
     void Start()
     {
         StartGame();
-
     }
 
 	void Update()
@@ -34,6 +43,14 @@ public class GameController : MonoBehaviour
 			m_CountDownImages[1].gameObject.SetActive(false);
 			m_CountDownImages[2].gameObject.SetActive(false);
 			m_CountDownImages[3].gameObject.SetActive(false);
+		}
+
+		if (checkShape == false)
+			energy.CurrentVal -= coef * Time.deltaTime;
+		else 
+		{
+			energy.CurrentVal += 10;
+			checkShape = false;
 		}
 	}
 
@@ -59,6 +76,7 @@ public class GameController : MonoBehaviour
         m_GameOverText.gameObject.SetActive(false);
         //SetSpeed(speed);
         lifeCount = 2;
+		checkShape = false;
     }
 
     public void loseOneLife()
@@ -72,6 +90,11 @@ public class GameController : MonoBehaviour
             OnGameOver();
         }   
     }
+
+	public void rightShape()
+	{
+		checkShape = true;
+	}
 
     public void winOneLife()
     {  
