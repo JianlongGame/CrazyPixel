@@ -46,15 +46,6 @@ public class Player : MonoBehaviour
         {
             Move();
         }
-			
-//		if (Input.GetKeyDown (KeyCode.Q)) 
-//		{
-//			energy.CurrentVal -= 10;
-//		}
-//		if (Input.GetKeyDown (KeyCode.W)) 
-//		{
-//			energy.CurrentVal += 10;
-//		}
     }
 
     public string GetColor()
@@ -113,7 +104,7 @@ public class Player : MonoBehaviour
 				lock (GameController.thisLock)
 				{
 					m_GameController.rightShape();
-					m_GameController.winOneLife();
+					//m_GameController.winOneLife();
 				}
 
 			}
