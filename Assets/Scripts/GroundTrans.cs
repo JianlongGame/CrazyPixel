@@ -67,7 +67,6 @@ public class GroundTrans : MonoBehaviour {
     {
 		if (levelCode == 0) {
 			firstLevel();
-			//mergeColor ();
 		} else if (levelCode >= 1 && levelCode <= 2) {
 			secLevel ();
 		} else if (levelCode >= 3 && levelCode <= 4) {

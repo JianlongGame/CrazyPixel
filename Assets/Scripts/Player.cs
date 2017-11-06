@@ -91,13 +91,19 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Renderer>().material.color != gameObject.GetComponent<Renderer>().material.color) //wrong colour
         {
-            lock(GameController.thisLock)
+			lock(GameController.thisLock)
             {
                 m_GameController.loseOneLife();
             }
         }
         else
         {
+			if (other.gameObject.GetComponent<MeshFilter> ().mesh.name == gameObject.GetComponent<MeshFilter> ().mesh.name) {
+				lock (GameController.thisLock)
+				{
+					m_GameController.winOneLife();
+				}
+			}
             lock (GameController.thisLock)
             {
                 m_GameController.winOneLife();
