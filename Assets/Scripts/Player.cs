@@ -104,7 +104,6 @@ public class Player : MonoBehaviour
 				lock (GameController.thisLock)
 				{
 					m_GameController.rightShape();
-					//m_GameController.winOneLife();
 				}
 
 			}

@@ -22,7 +22,6 @@ public class GameController : MonoBehaviour
 
 	[SerializeField] private Stat energy;
 	private const float coef = 1.0f;
-	//[SerializeField] public bool checkShape;
 
 	private void Awake()
 	{
@@ -46,13 +45,7 @@ public class GameController : MonoBehaviour
 		}
 
 		if (isGamePause == false && CounterDownDone ==true ) {
-			//if (checkShape == false)
-				energy.CurrentVal -= coef * Time.deltaTime;
-//			else 
-//			{
-//				energy.CurrentVal += 10;
-//				checkShape = false;
-//			}
+			energy.CurrentVal -= coef * Time.deltaTime;
 		}
 
 	}
@@ -79,7 +72,6 @@ public class GameController : MonoBehaviour
         m_GameOverText.gameObject.SetActive(false);
         //SetSpeed(speed);
         lifeCount = 2;
-		//checkShape = false;
     }
 
     public void loseOneLife()

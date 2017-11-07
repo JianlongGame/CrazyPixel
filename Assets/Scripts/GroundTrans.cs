@@ -71,6 +71,7 @@ public class GroundTrans : MonoBehaviour {
 			secLevel ();
 		} else if (levelCode >= 3 && levelCode <= 4) {
 			thrLevel ();
+
 		} else if (levelCode >= 5) {
 			mergeColor ();
 		}
@@ -129,10 +130,15 @@ public class GroundTrans : MonoBehaviour {
 	}
 
 	void mergeColor(){
-		prefab = obsShape [Random.Range (0, 3)];
+		int temp = Random.Range (0, 3);
+		prefab = obsShape [temp];
 		posX = mergePos [Random.Range (0, 2)];
 		posZ = lastObs.transform.position.z + 20;
-		pos = new Vector3 (posX, 0.13f*4, posZ);
+		if (temp == 0) {
+			pos = new Vector3 (posX, 0.13f * 2, posZ);
+		} else {
+			pos = new Vector3 (posX, 0.13f * 4, posZ);
+		}
 		lastObs = Instantiate (prefab, pos, prefab.transform.rotation);
 		lastObs.GetComponent<Renderer> ().material = merColor [Random.Range (0, 3)];
 		t1 = lastObs.transform.localScale.x;
