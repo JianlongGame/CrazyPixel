@@ -8,6 +8,8 @@ public class OnCollisionColorChange : MonoBehaviour {
     private GameObject ground;
     private Color orginColor;
     public Material colorMaterial; 
+
+	public Mesh obsMesh;
    
 	void Start () {
 		if (gameObject.name == "ColorSensor-1")
@@ -29,10 +31,12 @@ public class OnCollisionColorChange : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         ground.GetComponent<Renderer>().material.color = other.gameObject.GetComponent<Renderer>().material.color;
+		obsMesh = other.gameObject.GetComponent<MeshFilter> ().mesh;
     }
 
     private void OnTriggerExit(Collider other)
     {
         ground.GetComponent<Renderer>().material.color = orginColor;
+		obsMesh = null;
     }
 }

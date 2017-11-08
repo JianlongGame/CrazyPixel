@@ -3,7 +3,7 @@
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] TouchListener m_TouchListener;
-    [SerializeField] Player[] m_PlayerObjects;
+    [SerializeField] public Player[] m_PlayerObjects;
     float lastTouchTime;
 
     // Use this for initialization

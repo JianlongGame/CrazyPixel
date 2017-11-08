@@ -53,12 +53,11 @@ public class GroundTrans : MonoBehaviour {
 			if (Scrolling.movespeed <= 0.2f && nowTime - snapshot > 20) {
 				Scrolling.movespeed += 0.02f;
 				snapshot = nowTime;
-			} 
+			}
 			levelCode = (int)Random.Range (0, 5);//
 		} else if (nowTime >= 40) {
 			levelCode = (int)Random.Range (0, 7);
 		}
-        
         setLevels(levelCode);
 	}
 
@@ -71,9 +70,8 @@ public class GroundTrans : MonoBehaviour {
 			secLevel ();
 		} else if (levelCode >= 3 && levelCode <= 4) {
 			thrLevel ();
-
 		} else if (levelCode >= 5) {
-			mergeColor ();
+			mergeColor();
 		}
     }
 
