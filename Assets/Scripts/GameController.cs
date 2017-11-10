@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 			m_CountDownImages[3].gameObject.SetActive(false);
 		}
 
-		if (isGamePause == false && CounterDownDone ==true ) {
+		if (isGamePause == false && CounterDownDone ==true && isGameOver==false) {
 			energy.CurrentVal -= coef * Time.deltaTime;
 		}
 
