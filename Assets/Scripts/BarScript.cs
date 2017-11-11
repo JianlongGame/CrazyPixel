@@ -9,6 +9,7 @@ public class BarScript : MonoBehaviour {
 	[SerializeField]
 	private Image energy;
 	public float MaxValue { get; set;}
+    public static bool genArrow = false;
 	public float Value
 	{
 		set
@@ -36,6 +37,9 @@ public class BarScript : MonoBehaviour {
 //			energy.fillAmount = fillAmount;	
 //		}
 		energy.fillAmount = fillAmount;
+        if (fillAmount == 0) {
+            genArrow = true;
+        }
 	}
 
 	private float Map(float value, float inMin, float inMax, float outMin,float outMax)

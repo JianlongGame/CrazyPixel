@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
     public int lifeCount;
 
 	[SerializeField] private Stat energy;
-	private const float coef = 1.0f;
+	private const float coef = 5.0f;
 
 	private void Awake()
 	{

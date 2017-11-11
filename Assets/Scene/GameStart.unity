@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 889687632}
-  m_IndirectSpecularColor: {r: 0.44776452, g: 0.4977435, b: 0.57541806, a: 1}
+  m_IndirectSpecularColor: {r: 0.44776517, g: 0.49774438, b: 0.5754195, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2085,7 +2085,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4225558956846202, guid: 9e093136f7b787647bb08d81b428c41c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1846433128969930, guid: 9e093136f7b787647bb08d81b428c41c, type: 2}
       propertyPath: m_Name
@@ -2476,7 +2476,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 46.507004, y: 606.829, z: 205.002}
 --- !u!1 &970314364
 GameObject:
@@ -2685,7 +2685,7 @@ Camera:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_RenderingPath: -1
+  m_RenderingPath: 1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
