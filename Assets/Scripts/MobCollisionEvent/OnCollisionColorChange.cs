@@ -72,11 +72,13 @@ public class OnCollisionColorChange : MonoBehaviour {
             arrowDirection = Random.Range(0, 2);
         }
         GameObject arrow = null;
+
         if (arrowDirection == 0) {
-            arrow = GameObject.Find("ArrowColliderLeft");
+            arrow = Instantiate(Resources.Load("ArrowCollider/ArrowColliderLeft", typeof(GameObject))) as GameObject;
         } else {
-            arrow = GameObject.Find("ArrowColliderRight");
+            arrow = Instantiate(Resources.Load("ArrowCollider/ArrowColliderRight", typeof(GameObject))) as GameObject;
         }
+
         Vector3 pos = new Vector3((float)x, 0, (float)z);
         Instantiate(arrow, pos, arrow.transform.rotation);
     }
