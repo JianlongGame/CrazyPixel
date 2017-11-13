@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum TouchType
 {
@@ -47,17 +48,21 @@ public class TouchListener : MonoBehaviour
 
     void Update()
     {
-        // USE MOUSE CONTROLS
-        if (SystemInfo.deviceType == DeviceType.Desktop)
-        {
-            CheckMouseInput();
-            CheckKeyInput();
-        }
-        // USE TOUCH SCREEN CONTROLS
-        else if (SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            CheckTouchInput();
-        }
+		if(!EventSystem.current.IsPointerOverGameObject())  //if the menu is not enable
+		{
+			// USE MOUSE CONTROLS
+			if (SystemInfo.deviceType == DeviceType.Desktop)
+			{
+				CheckMouseInput();
+				CheckKeyInput();
+			}
+			// USE TOUCH SCREEN CONTROLS
+			else if (SystemInfo.deviceType == DeviceType.Handheld)
+			{
+				CheckTouchInput();
+			}
+		}
+       
     }
 
     void CheckMouseInput()
