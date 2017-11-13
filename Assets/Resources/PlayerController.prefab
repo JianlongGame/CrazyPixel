@@ -312,7 +312,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
-  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
   m_shapes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -339,7 +338,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
-  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
   m_shapes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
@@ -366,7 +364,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
   - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
   - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
-  - {fileID: 2100000, guid: 52529015d357bc24494f0e88122a9bef, type: 2}
   m_shapes:
   - {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

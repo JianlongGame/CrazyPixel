@@ -608,8 +608,6 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Pinch to Merge
 
-    and Unmerge
-
     Colors'
 --- !u!222 &222088096537826372
 CanvasRenderer:

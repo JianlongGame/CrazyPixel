@@ -28,8 +28,8 @@ public class Player : MonoBehaviour
     public string origColor;
     public bool isFused;
     Vector3 m_targetLoc;
+    Player fusedWith;
     int curShape;
-
 
     // Initialize the player
     void Start()
@@ -62,6 +62,9 @@ public class Player : MonoBehaviour
         else if (curShape == (int)PlayerShapes.Cube)
             gameObject.transform.localScale = new Vector3(scale.x, 0.25f, scale.z);
         gameObject.GetComponent<MeshFilter>().mesh = m_shapes[curShape];
+
+        if (isFused && fusedWith.curShape != curShape)
+            fusedWith.ChangeShape();
     }
 
     public void MoveTo(float direction)
@@ -69,15 +72,24 @@ public class Player : MonoBehaviour
         m_targetLoc = new Vector3(transform.position.x + direction, transform.position.y, transform.position.z);
     }
 
-    public void Fuse(bool fused, string color)
+    public void Fuse(bool fused, string color, Player other)
     {
         isFused = fused;
+        fusedWith = other;
         gameObject.layer = LayerMask.NameToLayer(color);
         gameObject.GetComponent<MeshRenderer>().material = m_colors[(int)System.Enum.Parse(typeof(PlayerColors), color)];
         if (fused)
-            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(2f, 1f, 1f));
+        {
+            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(4f, 1f, 1f));
+            curShape = 0;
+            Vector3 scale = gameObject.transform.localScale;
+            gameObject.transform.localScale = new Vector3(scale.x, 0.25f, scale.z);
+            gameObject.GetComponent<MeshFilter>().mesh = m_shapes[curShape];
+        }
         else
-            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(0.5f, 1f, 1f));
+        {
+            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(0.25f, 1f, 1f));
+        }
     }
 
     // Move the player towards their target position

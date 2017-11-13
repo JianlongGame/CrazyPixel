@@ -72,10 +72,10 @@ public class PlayerController : MonoBehaviour
         if (pA != pB)
         {
             string color = GetFusedColor(pA, pB);
-            pA.MoveTo(.375f);
-            pB.MoveTo(-.375f);
-            pA.Fuse(true, color);
-            pB.Fuse(true, color);
+            pA.MoveTo(.5f);
+            pB.MoveTo(-.5f);
+            pA.Fuse(true, color, pB);
+            pB.Fuse(true, color, pA);
         }
     }
 
@@ -84,10 +84,10 @@ public class PlayerController : MonoBehaviour
     {
         if (pA != pB)
         {
-            pA.MoveTo(-.375f);
-            pB.MoveTo(.375f);
-            pA.Fuse(false, pA.origColor);
-            pB.Fuse(false, pB.origColor);
+            pA.MoveTo(-.5f);
+            pB.MoveTo(.5f);
+            pA.Fuse(false, pA.origColor, null);
+            pB.Fuse(false, pB.origColor, null);
         }
     }
 
