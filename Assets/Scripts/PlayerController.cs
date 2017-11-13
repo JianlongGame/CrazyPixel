@@ -40,8 +40,8 @@ public class PlayerController : MonoBehaviour
                 SwapRight(player);
                 break;
 
-            // Fuse or unfuse colors
-            case TouchType.Pinch:
+            // Fuse colors
+            case TouchType.PinchIn:
                 int player2 = (int)(touch.endLoc.x / laneWidth);
                 Player p1 = m_PlayerObjects[player];
                 Player p2 = m_PlayerObjects[player2];
@@ -50,7 +50,17 @@ public class PlayerController : MonoBehaviour
                     return;
                 if (!p1.isFused && !p2.isFused)
                     FuseColors(p1, p2);
-                else if (p1.isFused && p2.isFused)
+                break;
+
+            // Unfuse colors
+            case TouchType.PinchOut:
+                player2 = (int)(touch.endLoc.x / laneWidth);
+                p1 = m_PlayerObjects[player];
+                p2 = m_PlayerObjects[player2];
+
+                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
+                    return;
+                if (p1.isFused && p2.isFused)
                     UnFuseColors(p1, p2);
                 break;
         }

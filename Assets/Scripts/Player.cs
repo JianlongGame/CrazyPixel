@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
             {
                 m_GameController.loseOneLife();
             }
-
         }
         else
         {
@@ -105,7 +104,6 @@ public class Player : MonoBehaviour
 				{
 					m_GameController.rightShape();
 				}
-
 			}
             lock (GameController.thisLock)
             {

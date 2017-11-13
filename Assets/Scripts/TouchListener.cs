@@ -8,7 +8,8 @@ public enum TouchType
     SwipeRight,
     SwipeUp,
     SwipeDown,
-    Pinch,
+    PinchIn,
+    PinchOut,
 }
 
 public class MyTouch
@@ -103,22 +104,40 @@ public class TouchListener : MonoBehaviour
 
     void CheckKeyInput()
     {
-        // Fuse|unfuse left and middle
+        // Fuse left and middle
         if (Input.GetKeyDown(KeyCode.A))
         {
             t.startTime = Time.time;
             t.startLoc = new Vector3(0, 0, 0);
             t.endLoc = new Vector3(Screen.width / 2f, 0, 0);
-            t.type = TouchType.Pinch;
+            t.type = TouchType.PinchIn;
             m_OnTouch(t);
         }
-        // Fuse|unfuse right and middle
+        // Unfuse left and middle
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            t.startTime = Time.time;
+            t.startLoc = new Vector3(0, 0, 0);
+            t.endLoc = new Vector3(Screen.width / 2f, 0, 0);
+            t.type = TouchType.PinchOut;
+            m_OnTouch(t);
+        }
+        // Fuse right and middle
         else if (Input.GetKeyDown(KeyCode.D))
         {
             t.startTime = Time.time;
             t.startLoc = new Vector3(Screen.width / 2f, 0, 0);
             t.endLoc = new Vector3(Screen.width - 100f, 0, 0);
-            t.type = TouchType.Pinch;
+            t.type = TouchType.PinchIn;
+            m_OnTouch(t);
+        }
+        // Unfuse right and middle
+        else if (Input.GetKeyDown(KeyCode.E))
+        {
+            t.startTime = Time.time;
+            t.startLoc = new Vector3(Screen.width / 2f, 0, 0);
+            t.endLoc = new Vector3(Screen.width - 100f, 0, 0);
+            t.type = TouchType.PinchOut;
             m_OnTouch(t);
         }
     }
@@ -182,10 +201,10 @@ public class TouchListener : MonoBehaviour
 
         // Find the difference in the distances between each frame.
         float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
-        if (deltaMagnitudeDiff > minSwipeDist)
-        {
-            t.type = TouchType.Pinch;
-        }
+        if (t1.position.x > t1PrevPos.x && t2PrevPos.x > t2.position.x)
+            t.type = TouchType.PinchIn;
+        else if (t1.position.x < t1PrevPos.x && t2PrevPos.x < t2.position.x)
+            t.type = TouchType.PinchOut;
     }
 
     void CheckTouchInput()
