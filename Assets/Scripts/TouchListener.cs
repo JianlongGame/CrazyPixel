@@ -41,6 +41,10 @@ public class TouchListener : MonoBehaviour
     private MyTouch t = new MyTouch();
     OnTouch m_OnTouch;
 
+	public PauseMenu pauseMenu;
+	public DeathMenu deathMenu;
+	public CountDown countDown;
+
     public void AddOnTouchCallback(OnTouch cb)
     {
         m_OnTouch += cb;
@@ -48,7 +52,7 @@ public class TouchListener : MonoBehaviour
 
     void Update()
     {
-		if(!EventSystem.current.IsPointerOverGameObject())  //if the menu is not enable
+		if(!EventSystem.current.IsPointerOverGameObject()&&!pauseMenu.isActiveAndEnabled&&!deathMenu.isActiveAndEnabled&&!countDown.isActiveAndEnabled)  //if the menu is not enable
 		{
 			// USE MOUSE CONTROLS
 			if (SystemInfo.deviceType == DeviceType.Desktop)
@@ -62,7 +66,6 @@ public class TouchListener : MonoBehaviour
 				CheckTouchInput();
 			}
 		}
-       
     }
 
     void CheckMouseInput()

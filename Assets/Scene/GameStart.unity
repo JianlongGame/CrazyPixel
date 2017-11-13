@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 889687632}
-  m_IndirectSpecularColor: {r: 0.44776517, g: 0.49774438, b: 0.5754195, a: 1}
+  m_IndirectSpecularColor: {r: 0.4477653, g: 0.49774414, b: 0.5754189, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1255,6 +1255,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114804308128661876, guid: 24545febf80e72947acdfd815669357b,
+        type: 2}
+      propertyPath: countDown
+      value: 
+      objectReference: {fileID: 2128938929}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24545febf80e72947acdfd815669357b, type: 2}
   m_IsPrefabParent: 0
@@ -2461,6 +2466,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 0, y: 0}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -3014,6 +3033,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 114709573962868284, guid: 905f70bcbd99f0348bb0850c370ee5c1,
+        type: 2}
+      propertyPath: pauseMenu
+      value: 
+      objectReference: {fileID: 1375290379}
+    - target: {fileID: 114709573962868284, guid: 905f70bcbd99f0348bb0850c370ee5c1,
+        type: 2}
+      propertyPath: deathMenu
+      value: 
+      objectReference: {fileID: 1535089469}
+    - target: {fileID: 114709573962868284, guid: 905f70bcbd99f0348bb0850c370ee5c1,
+        type: 2}
+      propertyPath: countDown
+      value: 
+      objectReference: {fileID: 2128938929}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 905f70bcbd99f0348bb0850c370ee5c1, type: 2}
   m_IsPrefabParent: 0
@@ -3627,6 +3661,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 2128938928}
+  - component: {fileID: 2128938930}
+  - component: {fileID: 2128938929}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
@@ -3652,7 +3688,24 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -270, y: -177.5}
+  m_SizeDelta: {x: -440, y: -255}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2128938929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128938927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3bf0b01a654a4909885b315458b3223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!222 &2128938930
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128938927}

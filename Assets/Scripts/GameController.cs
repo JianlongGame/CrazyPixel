@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	[SerializeField] Image[] m_CountDownImages;
 
 	public bool CounterDownDone = false;
+	public CountDown countDown;
     public DeathMenu deathMenu;
 	public PauseMenu pauseMenu;
 	public Button pauseButton;
@@ -42,6 +43,7 @@ public class GameController : MonoBehaviour
 			m_CountDownImages[1].gameObject.SetActive(false);
 			m_CountDownImages[2].gameObject.SetActive(false);
 			m_CountDownImages[3].gameObject.SetActive(false);
+			countDown.gameObject.SetActive(false);
 		}
 
 		if (isGamePause == false && CounterDownDone ==true && isGameOver==false) {
