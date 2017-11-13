@@ -16,8 +16,10 @@ public class OnCollisionColorChange : MonoBehaviour {
 	public Mesh obsMesh;
     
     private static object arrowSpawnCheck = new object();
-    public static int[] mobs = new int[] { 0, 0, 0 };
-    private int ind = 0;
+    public static GameObject[] mobs = new GameObject[3];
+    private int ind = 0;//Left by default
+
+    public static bool[] objsMoved = new bool[3];
 	void Start () {
 		if (gameObject.name == "ColorSensor-1")
         {
@@ -43,16 +45,27 @@ public class OnCollisionColorChange : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        mobs[ind] = 1;
         ground.GetComponent<Renderer>().material.color = other.gameObject.GetComponent<Renderer>().material.color;
-		obsMesh = other.gameObject.GetComponent<MeshFilter> ().mesh;
-        lock(arrowSpawnCheck) {
-            if (BarScript.genArrow) {
-                //Spawn an arrow
-                spawnArrow(Random.Range((float)0.4, -6));
-                //Set it to be false
-                BarScript.genArrow = false;
+        obsMesh = other.gameObject.GetComponent<MeshFilter>().mesh;
+        mobs[ind] = other.gameObject;
+
+        if (mobs[0] == mobs[1] && mobs[0] != null ||
+            mobs[1] == mobs[2] && mobs[1] != null) {//Sanity check for merged obstacles
+            return;
+        }
+
+        //Arrow generating
+        if (!objsMoved[ind]) {          
+            lock (arrowSpawnCheck) {
+                if (BarScript.genArrow) {
+                    //Spawn an arrow
+                    spawnArrow(Random.Range((float)0.4, -6));
+                    //Set it to be false
+                    BarScript.genArrow = false;
+                }
             }
+        } else {
+            objsMoved[ind] = false;
         }
     }
 
@@ -60,8 +73,10 @@ public class OnCollisionColorChange : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         ground.GetComponent<Renderer>().material.color = orginColor;
-        mobs[ind] = 0;
-		obsMesh = null;
+        
+        mobs[ind] = null;
+        obsMesh = null;
+        
     }
 
     private void spawnArrow(double z) {
@@ -72,14 +87,18 @@ public class OnCollisionColorChange : MonoBehaviour {
             arrowDirection = Random.Range(0, 2);
         }
         GameObject arrow = null;
-
+        Vector3 pos = new Vector3((float)x, 0, (float)z);
+        bool goRight = true;
         if (arrowDirection == 0) {
             arrow = Instantiate(Resources.Load("ArrowCollider/ArrowColliderLeft", typeof(GameObject))) as GameObject;
+            goRight = false;
         } else {
             arrow = Instantiate(Resources.Load("ArrowCollider/ArrowColliderRight", typeof(GameObject))) as GameObject;
         }
+        arrow.GetComponent<OnCollisionSwapLane>().ind = ind;
+        arrow.GetComponent<OnCollisionSwapLane>().goRight = goRight;
+        arrow.transform.position = pos;
 
-        Vector3 pos = new Vector3((float)x, 0, (float)z);
-        Instantiate(arrow, pos, arrow.transform.rotation);
+        
     }
 }
