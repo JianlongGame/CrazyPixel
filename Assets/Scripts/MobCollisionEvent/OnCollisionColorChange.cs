@@ -24,7 +24,7 @@ public class OnCollisionColorChange : MonoBehaviour {
 		if (gameObject.name == "ColorSensor-1")
         {
             ground = GameObject.Find("Ground/Left");
-            x = -1.15;
+            x = -1;
             
         }
         else if (gameObject.name == "ColorSensor0")
@@ -36,7 +36,7 @@ public class OnCollisionColorChange : MonoBehaviour {
         else
         {
             ground = GameObject.Find("Ground/Right");
-            x = 1.15;
+            x = 1;
             ind = 2;
         }
         orginColor = colorMaterial.color;
@@ -81,13 +81,13 @@ public class OnCollisionColorChange : MonoBehaviour {
 
     private void spawnArrow(double z) {
         int arrowDirection = 1;//1 is right, and 0 is pointing left
-        if (x == 1.15) {
+        if (x == 1) {
             arrowDirection = 0;
         } else if (x == 0) {
             arrowDirection = Random.Range(0, 2);
         }
         GameObject arrow = null;
-        Vector3 pos = new Vector3((float)x, 0, (float)z);
+        Vector3 pos = new Vector3((float)x, 0.1f, (float)z);
         bool goRight = true;
         if (arrowDirection == 0) {
             arrow = Instantiate(Resources.Load("ArrowCollider/ArrowColliderLeft", typeof(GameObject))) as GameObject;
