@@ -7,7 +7,7 @@ public class DeathMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameObject.SetActive (false);
+		gameObject.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -16,14 +16,14 @@ public class DeathMenu : MonoBehaviour {
 	}
 
 	public void ToggleEndMenu(){
-		gameObject.SetActive (true);
+		gameObject.SetActive(true);
 	}
 
 	public void CloseEndMenu(){
-		gameObject.SetActive (false);
+		gameObject.SetActive(false);
 	}
 
 	public void LoadsMainMenu(int sceneIndex){
-		SceneManager.LoadScene (sceneIndex);
+		SceneManager.LoadScene(sceneIndex);
 	}
 }

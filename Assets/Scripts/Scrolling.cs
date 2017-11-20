@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Scrolling : MonoBehaviour {
     public static float movespeed = 0.05f;
@@ -15,7 +13,7 @@ public class Scrolling : MonoBehaviour {
     // Update is called once per frame
     void Update()
 	{
-		if (GC.CounterDownDone == true && GC.isGamePause==false) 
+		if (GC.isCountdownFinished == true && GC.isGamePaused==false) 
 		{
 			transform.Translate(0, 0, -movespeed);
 			if (gameOver || transform.position.z <= -15f)
@@ -23,6 +21,5 @@ public class Scrolling : MonoBehaviour {
 				Destroy (gameObject);
 			}
 		}
-        
     }
 }

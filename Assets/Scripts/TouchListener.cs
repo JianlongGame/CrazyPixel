@@ -52,7 +52,7 @@ public class TouchListener : MonoBehaviour
 
     void Update()
     {
-		if(!EventSystem.current.IsPointerOverGameObject()&&!pauseMenu.isActiveAndEnabled&&!deathMenu.isActiveAndEnabled&&!countDown.isActiveAndEnabled)  //if the menu is not enable
+		if(!EventSystem.current.IsPointerOverGameObject() && !pauseMenu.isActiveAndEnabled && !deathMenu.isActiveAndEnabled && !countDown.isActiveAndEnabled)  //if the menu is not enable
 		{
 			// USE MOUSE CONTROLS
 			if (SystemInfo.deviceType == DeviceType.Desktop)

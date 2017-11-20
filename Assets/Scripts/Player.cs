@@ -102,16 +102,21 @@ public class Player : MonoBehaviour
     // Player collided with an object
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<Renderer>().material.color != gameObject.GetComponent<Renderer>().material.color) //wrong colour
+        Color objectColor = other.gameObject.GetComponent<Renderer>().material.color;
+
+        // wrong colour
+        if (objectColor != gameObject.GetComponent<Renderer>().material.color)
         {
 			lock(GameController.thisLock)
             {
                 m_GameController.loseOneLife();
             }
         }
+        // right color
         else
         {
-			if (other.gameObject.GetComponent<MeshFilter> ().mesh.name == gameObject.GetComponent<MeshFilter> ().mesh.name) {
+            // right shape
+            if (other.gameObject.GetComponent<MeshFilter>().mesh.name == gameObject.GetComponent<MeshFilter>().mesh.name) {
 				lock (GameController.thisLock)
 				{
 					m_GameController.rightShape();
@@ -119,6 +124,7 @@ public class Player : MonoBehaviour
 			}
             lock (GameController.thisLock)
             {
+                m_GameController.score += 1;
                 m_GameController.winOneLife();
             }
         }

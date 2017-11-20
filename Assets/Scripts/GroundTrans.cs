@@ -20,7 +20,6 @@ public class GroundTrans : MonoBehaviour {
 
     float t1, t2, t3;
     void Start() {
-        Debug.Log("Start");
         Scrolling.movespeed = 0.08f;
         startTime = Time.time;
         initObs();

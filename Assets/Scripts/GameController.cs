@@ -1,32 +1,29 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static Object thisLock = new Object();
 
-    [SerializeField] GameObject[] m_Obstacles;
-    [SerializeField] Text m_GameOverText;
-    [SerializeField] Image[] m_LifeImages;
-	[SerializeField] Image[] m_CountDownImages;
+    [SerializeField] GameObject[] obstacles;
+    [SerializeField] DeathMenu deathMenu;
+	[SerializeField] PauseMenu pauseMenu;
+    [SerializeField] GameMenu gameMenu;
 
-	public bool CounterDownDone = false;
-	public CountDown countDown;
-    public DeathMenu deathMenu;
-	public PauseMenu pauseMenu;
-	public Button pauseButton;
-    public float speed = 0.001f;
     public bool isGameOver;
-	public bool isGamePause;
-    public int lifeCount;
+	public bool isGamePaused;
+    public bool isCountdownFinished;
+    public float speed = 0.001f;
+    public int stage;
+    public int lives;
+    public float time;
+    public int score;
 
-	[SerializeField] private Stat energy;
-	private const float coef = 5.0f;
+    [SerializeField] private Stat energy;
+    private const float coef = 5.0f;
 
-	private void Awake()
+    private void Awake()
 	{
-		energy.Initialize ();
+		energy.Initialize();
 	}
 
     // Use this for initialization
@@ -37,30 +34,21 @@ public class GameController : MonoBehaviour
 
 	void Update()
 	{
-		if (CounterDownDone == true) 
-		{
-			m_CountDownImages[0].gameObject.SetActive(false);
-			m_CountDownImages[1].gameObject.SetActive(false);
-			m_CountDownImages[2].gameObject.SetActive(false);
-			m_CountDownImages[3].gameObject.SetActive(false);
-			countDown.gameObject.SetActive(false);
-		}
-
-		if (isGamePause == false && CounterDownDone ==true && isGameOver==false) {
+		if (isGamePaused == false && isCountdownFinished == true && isGameOver == false) {
 			energy.CurrentVal -= coef * Time.deltaTime;
-		}
-
-	}
+            time += Time.deltaTime;
+            gameMenu.SetScore(score);
+            gameMenu.SetTime((int)time);
+        }
+    }
 
     // Delete the previous game
     void ClearGame()
     {
-        
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
-        
     }
 
     // Start a new game
@@ -68,64 +56,61 @@ public class GameController : MonoBehaviour
     {
         ClearGame();
         isGameOver = false;
-		isGamePause = false;
+		isGamePaused = false;
+        isCountdownFinished = false;
         Scrolling.gameOver = false;
         GroundTrans.doSpawn = true;
-        m_GameOverText.gameObject.SetActive(false);
-        //SetSpeed(speed);
-        lifeCount = 2;
+        lives = 2;
+        time = 0.0f;
+        score = 0;
     }
 
     public void loseOneLife()
     {
-        if (lifeCount >= 0)
+        if (lives >= 0)
         {
-            m_LifeImages[lifeCount--].gameObject.SetActive(false);
+            gameMenu.RemoveLife(lives--);
         }
-        if (lifeCount < 0)
+        if (lives < 0)
         {
             OnGameOver();
         }   
     }
 
-	public void rightShape()
+    public void winOneLife()
+    {
+        if (lives < 2)
+        {
+            gameMenu.AddLife(++lives);
+        }
+    }
+
+    public void rightShape()
 	{
 		//checkShape = true;
 		energy.CurrentVal += 10;
 	}
 
-    public void winOneLife()
-    {  
-        if (lifeCount < 2)
-        {
-            m_LifeImages[++lifeCount].gameObject.SetActive(true);
-        }  
-    }
-
     // Player has died
     void OnGameOver()
     {
-        //SetSpeed(0.0f);
         GroundTrans.doSpawn = false;
         Scrolling.gameOver = true;
-        m_GameOverText.gameObject.SetActive(true);
         isGameOver = true;
         deathMenu.ToggleEndMenu();  //show the death button when the player died
     }
    
 	public void PauseGame()
 	{
-		isGamePause = true;
-		pauseMenu.TogglePauseMenu(); 
-		pauseButton.gameObject.SetActive (false);  //hide pause button
-		//deathMenu.ToggleEndMenu();
+		isGamePaused = true;
+		pauseMenu.TogglePauseMenu();
+        gameMenu.Pause(true);
 	}
 
 	public void ContinueGame()
 	{
-		isGamePause = false;
-		pauseMenu.ClosePauseMenu(); 
-		pauseButton.gameObject.SetActive (true); //show pause button
-		//deathMenu.CloseEndMenu();
+		isGamePaused = false;
+		pauseMenu.ClosePauseMenu();
+        gameMenu.Pause(false);
 	}
 }

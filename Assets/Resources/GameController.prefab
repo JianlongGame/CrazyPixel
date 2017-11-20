@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4339189929904664}
   - component: {fileID: 114804308128661876}
+  - component: {fileID: 114483889858835894}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -40,6 +41,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114483889858835894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622294313884242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beede787c17fb7e4d8e1867f35fb330a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsShape:
+  - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
+  - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
+  - {fileID: 1596848654505824, guid: b7fb05430b43947adab017169d63713c, type: 2}
+  lanePos:
+  - -1
+  - 0
+  - 1
+  obsColor:
+  - {fileID: 2100000, guid: 2ee0bce255434b64bac67cb6a890714c, type: 2}
+  - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
+  - {fileID: 2100000, guid: 8738e00b5401d5f4d8d014c476da7ed6, type: 2}
+  mergePos:
+  - 0.5
+  - -0.5
+  merColor:
+  - {fileID: 2100000, guid: 0fc395baf239043c892647b4c4cb5fa2, type: 2}
+  - {fileID: 2100000, guid: a46bcafc0665d455db072f5e5f4e6d79, type: 2}
+  - {fileID: 2100000, guid: 26858d7f3aef0453b92dc4e42756d77f, type: 2}
 --- !u!114 &114804308128661876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,10 +82,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7755adba03c69c44ae1fff3eda0a0fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Obstacles:
-  - {fileID: 1049543911044878, guid: 727b5a83458134a21887ced27992a8fb, type: 2}
-  - {fileID: 1282997401910622, guid: 2f441b89fd3714a09a3f6dbca4f96458, type: 2}
-  m_GameOverText: {fileID: 0}
+  obstacles: []
   deathMenu: {fileID: 0}
+  pauseMenu: {fileID: 0}
+  gameMenu: {fileID: 0}
   speed: 0.001
   isGameOver: 0
+  isGamePaused: 0
+  isCountdownFinished: 0
+  lifeCount: 0
+  time: 0
+  score: 0
+  energy:
+    bar: {fileID: 0}
+    maxVal: 100
+    currentVal: 50

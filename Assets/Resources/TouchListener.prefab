@@ -51,3 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a316e0f1c7bd9749ba9e75ed31bfbf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
+  deathMenu: {fileID: 0}
+  countDown: {fileID: 0}
