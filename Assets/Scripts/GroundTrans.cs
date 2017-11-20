@@ -9,7 +9,6 @@ public class GroundTrans : MonoBehaviour {
     private Vector3 pos;
     private GameObject prefab, lastObs, tempObs;
     private List<float> xTempList = new List<float>();
-    private List<GameObject> obsTempList = new List<GameObject>();
     public static bool doSpawn = true;
 
     public List<Material> obsColor = new List<Material>();
@@ -30,94 +29,79 @@ public class GroundTrans : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         if (doSpawn && lastObs.transform.position.z < 40) {//Generate obstacles
-            setObs();
+            int levelCode = setSpeed();
+            stageChoice(levelCode);
         }
-       
     }
 
     void initObs() {
-
         prefab = obsShape[Random.Range(0, 3)];
         posX = lanePos[Random.Range(0, 3)];
-        pos = new Vector3(posX, 0.13f, (posZ + 0 * 20f));
+        pos = new Vector3(posX, 0.13f, 0);
         lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
         lastObs.GetComponent<Renderer>().material = obsColor[Random.Range(0, 3)];
     }
 
-    void setObs() {
-        nowTime = Time.time - startTime;
+    void stageChoice(int levelCode){
+    	if(LoadSceneOnClick.stageNum!=5 && levelCode >=5){
+    		levelCode = Random.Range(0, 5);
+    	}
+    	switch(LoadSceneOnClick.stageNum){
+    		case 1 : //matchColor
+    		case 4 : //changeLane
+    			obsNum(1,levelCode);
+    			break;
+    		case 2 :
+    			mergeObstacle(1);
+    			break;
+    		case 3 : //matchShape
+    		case 5 : //mixStage
+    			obsNum(3,levelCode);
+    			break;
+    		default:
+    			obsNum(1,levelCode);//matchColor
+    			break;
+    	}
+    }
+
+    int setSpeed(){
+    	nowTime = Time.time - startTime;
         int levelCode = 0;
         if (nowTime >= 10 && nowTime < 30) {
-            levelCode = (int)Random.Range(0, 3);
+            levelCode = Random.Range(0, 3);
         } else if (nowTime >= 30 && nowTime < 40) {
-            if (Scrolling.movespeed <= 0.2f && nowTime - snapshot > 20) {
-                Scrolling.movespeed += 0.02f;
+            if (Scrolling.movespeed <= 0.2f && nowTime - snapshot > 20) { //speed always goes up, cannot stop icreasing.
+                Scrolling.movespeed += 0.01f;
                 snapshot = nowTime;
             }
-            levelCode = (int)Random.Range(0, 5);//
+            levelCode = Random.Range(0, 5);
         } else if (nowTime >= 40) {
-            levelCode = (int)Random.Range(0, 7);
+            levelCode = Random.Range(0, 7);
         }
-        setLevels(levelCode);
+        return levelCode;
     }
 
-
-    private void setLevels(int levelCode)
-    {
-        if (levelCode == 0) {
-            firstLevel();
+    void obsNum(int shape, int levelCode){
+    	if (levelCode == 0) {
+            spwanObstacle(shape,1);
         } else if (levelCode >= 1 && levelCode <= 2) {
-            secLevel();
+            spwanObstacle(shape,2);
         } else if (levelCode >= 3 && levelCode <= 4) {
-            thrLevel();
+            spwanObstacle(shape,3);
         } else if (levelCode >= 5) {
-            mergeColor();
+            mergeObstacle(shape);
         }
     }
 
-    // only one obstacle in one row
-    void firstLevel() {
-        prefab = obsShape[Random.Range(0, 3)];
-        posX = lanePos[Random.Range(0, 3)];
-        posZ = lastObs.transform.position.z + 20;
-        pos = new Vector3(posX, 0.13f, posZ);
-        lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
-        lastObs.GetComponent<Renderer>().material = obsColor[Random.Range(0, 3)];
-    }
-
-    // two different color obstacles in one row
-    void secLevel() {
-        xTempList.Clear();
-        obsTempList.Clear();
-        xTempList = new List<float>(lanePos);
-        obsTempList = new List<GameObject>(obsShape);
+    void spwanObstacle(int shape,int num) {
+    	xTempList.Clear();
         colTempList.Clear();//
+        xTempList = new List<float>(lanePos);
         colTempList = new List<Material>(obsColor);//
         posZ = lastObs.transform.position.z + 20;
-        for (int j = 0; j < 2; j++) {
+        for (int j = 0; j < num; j++) {
             posX = xTempList[Random.Range(0, xTempList.Count)];
-            prefab = obsTempList[Random.Range(0, obsTempList.Count)];
-            m = colTempList[Random.Range(0, colTempList.Count)];//
-            pos = new Vector3(posX, 0.13f, posZ);
-            lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
-            lastObs.GetComponent<Renderer>().material = m;//
-            xTempList.Remove(posX);
-            obsTempList.Remove(prefab);
-            colTempList.Remove(m);//
-        }
-    }
-
-    // three different color obstacles in one row
-    void thrLevel() {
-        xTempList.Clear();
-        obsTempList.Clear();
-        xTempList = new List<float>(lanePos);
-        obsTempList = new List<GameObject>(obsShape);
-        colTempList.Clear();//
-        colTempList = new List<Material>(obsColor);//
-        for (int j = 0; j < 3; j++) {
-            posX = xTempList[Random.Range(0, xTempList.Count)];
-            prefab = obsTempList[j];
+            prefab = obsShape[Random.Range(3-shape, 3)];
             m = colTempList[Random.Range(0, colTempList.Count)];//
             pos = new Vector3(posX, 0.13f, posZ);
             lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
@@ -127,8 +111,11 @@ public class GroundTrans : MonoBehaviour {
         }
     }
 
-    void mergeColor() {
-        int temp = Random.Range(0, 3);
+    void mergeObstacle(int shape) {
+    	int temp = 2;
+    	if(shape != 1){
+    		temp = Random.Range(0, 3);
+    	}
         prefab = obsShape[temp];
         posX = mergePos[Random.Range(0, 2)];
         posZ = lastObs.transform.position.z + 20;
@@ -144,5 +131,4 @@ public class GroundTrans : MonoBehaviour {
         t3 = lastObs.transform.localScale.z;
         lastObs.transform.localScale = new Vector3(t1 * 4, t2 * 4, t3 * 4);
     }
-
 }

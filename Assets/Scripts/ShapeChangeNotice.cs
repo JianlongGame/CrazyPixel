@@ -16,18 +16,20 @@ public class ShapeChangeNotice : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		for(int i=0;i<3;i++){
-			if (m_GoundCollisions [i].obsMesh) {
-				string curObs = m_GoundCollisions [i].obsMesh.name;
-				string curPlayer = m_PlayerController.m_PlayerObjects [i].GetComponent<MeshFilter> ().mesh.name;
-				if (curObs != curPlayer) {
-					m_ShapeDisplay [i].gameObject.SetActive (true);
-					m_ShapeDisplay [i].GetComponent<MeshFilter> ().mesh = m_GoundCollisions [i].obsMesh;
+		if(LoadSceneOnClick.stageNum==3 || LoadSceneOnClick.stageNum == 5){
+			for(int i=0;i<3;i++){
+				if (m_GoundCollisions [i].obsMesh) {
+					string curObs = m_GoundCollisions [i].obsMesh.name;
+					string curPlayer = m_PlayerController.m_PlayerObjects [i].GetComponent<MeshFilter> ().mesh.name;
+					if (curObs != curPlayer) {
+						m_ShapeDisplay [i].gameObject.SetActive (true);
+						m_ShapeDisplay [i].GetComponent<MeshFilter> ().mesh = m_GoundCollisions [i].obsMesh;
+					} else {
+						m_ShapeDisplay [i].gameObject.SetActive (false);
+					}
 				} else {
 					m_ShapeDisplay [i].gameObject.SetActive (false);
 				}
-			} else {
-				m_ShapeDisplay [i].gameObject.SetActive (false);
 			}
 		}
 	}

@@ -54,8 +54,23 @@ public class OnCollisionColorChange : MonoBehaviour {
             return;
         }
 
+        if(LoadSceneOnClick.stageNum==4||LoadSceneOnClick.stageNum==5){
+            //Arrow generating
+            if (!objsMoved[ind]) {          
+                lock (arrowSpawnCheck) {
+                    if (BarScript.genArrow) {
+                        //Spawn an arrow
+                        spawnArrow(Random.Range((float)0.4, -6));
+                        //Set it to be false
+                        BarScript.genArrow = false;
+                    }
+                }
+            } else {
+                objsMoved[ind] = false;
+            }
+        }
         //Arrow generating
-        if (!objsMoved[ind]) {          
+        /*if (!objsMoved[ind]) {          
             lock (arrowSpawnCheck) {
                 if (BarScript.genArrow) {
                     //Spawn an arrow
@@ -66,7 +81,7 @@ public class OnCollisionColorChange : MonoBehaviour {
             }
         } else {
             objsMoved[ind] = false;
-        }
+        }*/
     }
 
 
