@@ -34,11 +34,15 @@ public class GroundTrans : MonoBehaviour {
     }
 
     void initObs() {
-        prefab = obsShape[Random.Range(0, 3)];
-        posX = lanePos[Random.Range(0, 3)];
-        pos = new Vector3(posX, 0.13f, 0);
-        lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
-        lastObs.GetComponent<Renderer>().material = obsColor[Random.Range(0, 3)];
+    	if(LoadSceneOnClick.stageNum == 2){
+    		mergeObstacle(1);
+    	} else{
+    		prefab = obsShape[2];
+        	posX = lanePos[Random.Range(0, 3)];
+        	pos = new Vector3(posX, 0.13f, 0);
+        	lastObs = Instantiate(prefab, pos, prefab.transform.rotation);
+        	lastObs.GetComponent<Renderer>().material = obsColor[Random.Range(0, 3)];
+    	}
     }
 
     void stageChoice(int levelCode){
@@ -117,7 +121,11 @@ public class GroundTrans : MonoBehaviour {
     	}
         prefab = obsShape[temp];
         posX = mergePos[Random.Range(0, 2)];
-        posZ = lastObs.transform.position.z + 20;
+        if(lastObs == null){
+        	posZ = 0;
+        } else{
+        	posZ = lastObs.transform.position.z + 20;
+        }
         if (temp == 0) {
             pos = new Vector3(posX, 0.13f * 2, posZ);
         } else {
