@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     public int score;
 
     [SerializeField] private Stat energy;
-    private const float coef = 5.0f;
+    private const float coef = 2.0f;
 
     private void Awake()
 	{

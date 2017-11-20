@@ -14,14 +14,18 @@ public class BarScript : MonoBehaviour {
 	{
 		set
 		{
-			//fillAmount = Map (value, 0, MaxValue, 0, 1);	
-			fillAmount = Map (value, 0, MaxValue, 0, 0);
+			fillAmount = Map (value, 0, MaxValue, 0, 1);	
+			//fillAmount = Map (value, 0, MaxValue, 0, 0);
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
 		//Value = 100;
+		if(LoadSceneOnClick.stageNum==1||LoadSceneOnClick.stageNum==2||LoadSceneOnClick.stageNum==4)
+		{
+			gameObject.SetActive (false);
+		}
 	}
 	
 	// Update is called once per frame
