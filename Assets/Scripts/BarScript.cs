@@ -14,18 +14,22 @@ public class BarScript : MonoBehaviour {
 	{
 		set
 		{
-			fillAmount = Map (value, 0, MaxValue, 0, 1);	
-			//fillAmount = Map (value, 0, MaxValue, 0, 0);
+            int amount = 1;
+            if (LoadSceneOnClick.stageNum == 4) {
+                amount = 0;
+            }
+            fillAmount = Map(value, 0, MaxValue, 0, amount);       
 		}
 	}
 
 	// Use this for initialization
 	void Start () {
 		//Value = 100;
-		if(LoadSceneOnClick.stageNum==1||LoadSceneOnClick.stageNum==2||LoadSceneOnClick.stageNum==4)
+		if(LoadSceneOnClick.stageNum < 3)
 		{
 			gameObject.SetActive (false);
-		}
+            
+		} 
 	}
 	
 	// Update is called once per frame
@@ -41,7 +45,7 @@ public class BarScript : MonoBehaviour {
 //			energy.fillAmount = fillAmount;	
 //		}
 		energy.fillAmount = fillAmount;
-        if (fillAmount == 0) {
+        if (fillAmount == 0 || LoadSceneOnClick.stageNum == 4) {
             genArrow = true;
         }
 	}

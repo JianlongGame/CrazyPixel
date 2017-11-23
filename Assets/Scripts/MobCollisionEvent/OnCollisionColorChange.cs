@@ -17,8 +17,9 @@ public class OnCollisionColorChange : MonoBehaviour {
     
     private static object arrowSpawnCheck = new object();
     public static GameObject[] mobs = new GameObject[3];
-    private int ind = 0;//Left by default
 
+    private int ind = 0;//Left by default
+    
     public static bool[] objsMoved = new bool[3];
 	void Start () {
 		if (gameObject.name == "ColorSensor-1")
@@ -50,38 +51,26 @@ public class OnCollisionColorChange : MonoBehaviour {
         mobs[ind] = other.gameObject;
 
         if (mobs[0] == mobs[1] && mobs[0] != null ||
-            mobs[1] == mobs[2] && mobs[1] != null) {//Sanity check for merged obstacles
+            mobs[1] == mobs[2] && mobs[1] != null || LoadSceneOnClick.stageNum < 4) {//Sanity check for merged obstacles
             return;
         }
 
-        if(LoadSceneOnClick.stageNum==4||LoadSceneOnClick.stageNum==5){
-            //Arrow generating
-            if (!objsMoved[ind]) {          
-                lock (arrowSpawnCheck) {
-                    if (BarScript.genArrow) {
-                        //Spawn an arrow
-                        spawnArrow(Random.Range((float)0.4, -6));
-                        //Set it to be false
-                        BarScript.genArrow = false;
-                    }
-                }
-            } else {
-                objsMoved[ind] = false;
-            }
-        }
-        //Arrow generating
-        /*if (!objsMoved[ind]) {          
+        //Arrow generating     
+        if (!objsMoved[ind]) {          
             lock (arrowSpawnCheck) {
+
                 if (BarScript.genArrow) {
                     //Spawn an arrow
                     spawnArrow(Random.Range((float)0.4, -6));
                     //Set it to be false
                     BarScript.genArrow = false;
+                    
                 }
             }
         } else {
             objsMoved[ind] = false;
-        }*/
+        }
+        
     }
 
 
