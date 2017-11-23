@@ -97,7 +97,7 @@ public class GameController : MonoBehaviour
         GroundTrans.doSpawn = false;
         Scrolling.gameOver = true;
         isGameOver = true;
-        deathMenu.ToggleEndMenu();  //show the death button when the player died
+        deathMenu.ToggleEndMenu(score);  //show the death button and pass the score when the player died
     }
    
 	public void PauseGame()
