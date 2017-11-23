@@ -21,6 +21,7 @@ public enum PlayerShapes
 public class Player : MonoBehaviour
 {
     [SerializeField] GameController m_GameController;
+    [SerializeField] SplatterController splatter;
     [SerializeField] float m_moveSpeed;
     [SerializeField] Material[] m_colors;
     [SerializeField] Mesh[] m_shapes;
@@ -103,13 +104,15 @@ public class Player : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Color objectColor = other.gameObject.GetComponent<Renderer>().material.color;
+        Color thisColor = gameObject.GetComponent<Renderer>().material.color;
 
         // wrong colour
-        if (objectColor != gameObject.GetComponent<Renderer>().material.color)
+        if (objectColor != thisColor)
         {
 			lock(GameController.thisLock)
             {
                 m_GameController.loseOneLife();
+                splatter.Splat(transform.position.x * 200f, objectColor);
             }
         }
         // right color

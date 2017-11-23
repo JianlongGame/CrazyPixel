@@ -304,6 +304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
+  splatter: {fileID: 0}
   m_moveSpeed: 10
   m_colors:
   - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
@@ -330,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
+  splatter: {fileID: 0}
   m_moveSpeed: 10
   m_colors:
   - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
@@ -356,6 +358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_GameController: {fileID: 0}
+  splatter: {fileID: 0}
   m_moveSpeed: 10
   m_colors:
   - {fileID: 2100000, guid: 5d868cdbe466c764da9f0072c3dba8c4, type: 2}
