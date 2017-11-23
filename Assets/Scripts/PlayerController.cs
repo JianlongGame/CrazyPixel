@@ -4,13 +4,16 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] TouchListener m_TouchListener;
     [SerializeField] public Player[] m_PlayerObjects;
+    [SerializeField] AudioClip[] m_music;
     float lastTouchTime;
+    AudioSource fuseMusic;
 
     // Use this for initialization
     void Start()
     {
         lastTouchTime = Time.time;
         m_TouchListener.AddOnTouchCallback(OnTouch);
+        fuseMusic = GetComponent<AudioSource>();
     }
 
     // Control player
@@ -77,7 +80,9 @@ public class PlayerController : MonoBehaviour
     void FuseColors(Player pA, Player pB)
     {
         if (pA != pB)
-        {
+        {   
+            fuseMusic.clip = m_music[0];
+            fuseMusic.Play();
             string color = GetFusedColor(pA, pB);
             pA.MoveTo(.5f);
             pB.MoveTo(-.5f);
@@ -91,6 +96,8 @@ public class PlayerController : MonoBehaviour
     {
         if (pA != pB)
         {
+            fuseMusic.clip = m_music[1];
+            fuseMusic.Play();
             pA.MoveTo(-.5f);
             pB.MoveTo(.5f);
             pA.Fuse(false, pA.origColor, null);
