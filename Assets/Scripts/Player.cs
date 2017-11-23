@@ -25,12 +25,15 @@ public class Player : MonoBehaviour
     [SerializeField] float m_moveSpeed;
     [SerializeField] Material[] m_colors;
     [SerializeField] Mesh[] m_shapes;
+    [SerializeField] AudioClip[] m_music;
 
     public string origColor;
     public bool isFused;
     Vector3 m_targetLoc;
     Player fusedWith;
     int curShape;
+    AudioSource collisionMusic;
+    Vector3 disappVector;
 
     // Initialize the player
     void Start()
@@ -38,6 +41,7 @@ public class Player : MonoBehaviour
         m_targetLoc = transform.position;
         curShape = 0;
         isFused = false;
+        collisionMusic = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -111,6 +115,8 @@ public class Player : MonoBehaviour
         {
 			lock(GameController.thisLock)
             {
+                collisionMusic.clip = m_music[0];
+                collisionMusic.Play();
                 m_GameController.loseOneLife();
                 splatter.Splat(transform.position.x * 200f, objectColor);
             }
@@ -127,6 +133,11 @@ public class Player : MonoBehaviour
 			}
             lock (GameController.thisLock)
             {
+                collisionMusic.clip = m_music[1];
+                collisionMusic.Play();
+                disappVector = other.transform.position;
+                disappVector.z = -12;
+                other.transform.position = disappVector;
                 m_GameController.score += 1;
                 m_GameController.winOneLife();
             }

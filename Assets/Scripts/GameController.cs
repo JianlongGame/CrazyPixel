@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour
     [SerializeField] DeathMenu deathMenu;
 	[SerializeField] PauseMenu pauseMenu;
     [SerializeField] GameMenu gameMenu;
+    [SerializeField] AudioClip m_music;
 
     public bool isGameOver;
 	public bool isGamePaused;
@@ -20,6 +21,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Stat energy;
     private const float coef = 2.0f;
+    AudioSource scoreMusic;
 
     private void Awake()
 	{
@@ -30,6 +32,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         StartGame();
+        scoreMusic = GetComponent<AudioSource>();
     }
 
 	void Update()
@@ -97,6 +100,8 @@ public class GameController : MonoBehaviour
         GroundTrans.doSpawn = false;
         Scrolling.gameOver = true;
         isGameOver = true;
+        scoreMusic.clip = m_music;
+        scoreMusic.Play();
         deathMenu.ToggleEndMenu(score);  //show the death button and pass the score when the player died
     }
    
