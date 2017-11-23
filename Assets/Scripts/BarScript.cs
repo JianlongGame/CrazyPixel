@@ -30,6 +30,12 @@ public class BarScript : MonoBehaviour {
 			gameObject.SetActive (false);
             
 		} 
+
+        if (LoadSceneOnClick.stageNum == 4) {
+            gameObject.GetComponent<Image>().enabled = false;
+        } else {
+            gameObject.GetComponent<Image>().enabled = true;
+        }
 	}
 	
 	// Update is called once per frame
