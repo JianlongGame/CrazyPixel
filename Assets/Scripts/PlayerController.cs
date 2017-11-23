@@ -25,11 +25,6 @@ public class PlayerController : MonoBehaviour
 
         switch (touch.type)
         {
-            // Change shape
-            case TouchType.Tap:
-                m_PlayerObjects[player].ChangeShape();
-                break;
-
             // Move left
             case TouchType.SwipeLeft:
                 SwapLeft(player);
@@ -40,28 +35,40 @@ public class PlayerController : MonoBehaviour
                 SwapRight(player);
                 break;
 
+            // Change shape
+            case TouchType.Tap:
+                if (LoadSceneOnClick.stageNum == 3 || LoadSceneOnClick.stageNum == 5)
+                    m_PlayerObjects[player].ChangeShape();
+                break;
+
             // Fuse colors
             case TouchType.PinchIn:
-                int player2 = (int)(touch.endLoc.x / laneWidth);
-                Player p1 = m_PlayerObjects[player];
-                Player p2 = m_PlayerObjects[player2];
+                if (LoadSceneOnClick.stageNum == 2 || LoadSceneOnClick.stageNum == 5)
+                {
+                    int player2 = (int)(touch.endLoc.x / laneWidth);
+                    Player p1 = m_PlayerObjects[player];
+                    Player p2 = m_PlayerObjects[player2];
 
-                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
-                    return;
-                if (!p1.isFused && !p2.isFused)
-                    FuseColors(p1, p2);
+                    if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
+                        return;
+                    if (!p1.isFused && !p2.isFused)
+                        FuseColors(p1, p2);
+                }
                 break;
 
             // Unfuse colors
             case TouchType.PinchOut:
-                player2 = (int)(touch.endLoc.x / laneWidth);
-                p1 = m_PlayerObjects[player];
-                p2 = m_PlayerObjects[player2];
+                if (LoadSceneOnClick.stageNum == 2 || LoadSceneOnClick.stageNum == 5)
+                {
+                    int player2 = (int)(touch.endLoc.x / laneWidth);
+                    Player p1 = m_PlayerObjects[player];
+                    Player p2 = m_PlayerObjects[player2];
 
-                if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
-                    return;
-                if (p1.isFused && p2.isFused)
-                    UnFuseColors(p1, p2);
+                    if (player == 0 && player2 == 2 || player == 2 && player2 == 0)
+                        return;
+                    if (p1.isFused && p2.isFused)
+                        UnFuseColors(p1, p2);
+                }
                 break;
         }
     }
