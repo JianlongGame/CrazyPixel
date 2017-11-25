@@ -73,15 +73,22 @@ public class GroundTrans : MonoBehaviour {
         if (nowTime >= 10 && nowTime < 30) {
             levelCode = Random.Range(0, 3);
         } else if (nowTime >= 30 && nowTime < 40) {
-            if (Scrolling.movespeed <= 0.2f && nowTime - snapshot > 20) { //speed always goes up, cannot stop icreasing.
-                Scrolling.movespeed += 0.01f;
-                snapshot = nowTime;
-            }
+            speedup(10);
             levelCode = Random.Range(0, 5);
-        } else if (nowTime >= 40) {
+        } else if (nowTime >= 45) {
+            speedup(5);
             levelCode = Random.Range(0, 7);
         }
+
+        
         return levelCode;
+    }
+
+    private void speedup(int interval) {
+        if (Scrolling.movespeed <= 0.18f && nowTime - snapshot > interval) { //speed always goes up, cannot stop icreasing.
+            Scrolling.movespeed += 0.01f;
+            snapshot = nowTime;
+        }
     }
 
     void obsNum(int shape, int levelCode){
