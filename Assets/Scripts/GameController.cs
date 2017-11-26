@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] DeathMenu deathMenu;
 	[SerializeField] PauseMenu pauseMenu;
     [SerializeField] GameMenu gameMenu;
+	[SerializeField] PassMenu passMenu;
     [SerializeField] SelectOnInput selectOnInput;
     public bool isGameOver;
 	public bool isGamePaused;
@@ -20,10 +21,12 @@ public class GameController : MonoBehaviour
     public int score;
 
     [SerializeField] private Stat energy;
-    private const float coef = 2.0f;
+    private const float coef_3 = 1.0f;
+	private const float coef_5 = 1.5f;
 
-    private int[] scores = { 30, 15, 30, 50 };
-    private int curStage;
+
+    private int[] scores = { 30, 15, 100, 30 };
+    public int curStage;
     private void Awake()
 	{
 		energy.Initialize();
@@ -32,14 +35,18 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        curStage = PlayerPrefs.GetInt("stageNum");
+        //curStage = PlayerPrefs.GetInt("stageNum");
+		curStage = LoadSceneOnClick.stageNum;
         StartGame();
     }
 
 	void Update()
 	{
 		if (isGamePaused == false && isCountdownFinished == true && isGameOver == false) {
-			energy.CurrentVal -= coef * Time.deltaTime;
+			if(curStage==3)
+				energy.CurrentVal -= coef_3 * Time.deltaTime;
+			if(curStage==5)
+				energy.CurrentVal -= coef_5 * Time.deltaTime;
             time += Time.deltaTime;
             gameMenu.SetScore(score);
             gameMenu.SetTime((int)time);
@@ -47,13 +54,23 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void scoreCheck(int ind, int score) {
-        if(ind == 4 || ind > curStage) {
+    private void scoreCheck(int ind, int score) {			
+        if(ind == 4 || ind > curStage-1) {
             return;
-        } else if (score >= scores[ind]) {
-            PlayerPrefs.SetInt("stageNum", ind + 1);
-        }
+		} else
+		{ 
+			if (curStage == 3&&energy.CurrentVal>95) 
+			{
+				PlayerPrefs.SetInt ("stageNum", ind + 1);
+				PassGame ();
+			}
+			if (score >= scores [ind]) {
+				PlayerPrefs.SetInt ("stageNum", ind + 1);
+				PassGame ();
+			}
 
+        }
+			
     }
 
     // Delete the previous game
@@ -125,7 +142,15 @@ public class GameController : MonoBehaviour
 	{
 		isGamePaused = false;
 		pauseMenu.ClosePauseMenu();
+		passMenu.ClosePassMenu();
         gameMenu.Pause(false);
+	}
+
+	public void PassGame()
+	{
+		isGamePaused = true;
+		passMenu.TogglePassMenu();
+		gameMenu.Pause(true);
 	}
 }
 

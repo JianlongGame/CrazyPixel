@@ -5,6 +5,7 @@ public class CountDown : MonoBehaviour
 {
     [SerializeField] Text countdownText;
     [SerializeField] Text stageText;
+	[SerializeField] Image mergeHintImage;
     public bool isFinished = false;
     float timer = 4;
 
@@ -13,6 +14,7 @@ public class CountDown : MonoBehaviour
     {
         stageText.text = "";
         countdownText.text = "3";
+		mergeHintImage.gameObject.SetActive (false);
     }
 
     // Update is called once per frame
@@ -38,12 +40,19 @@ public class CountDown : MonoBehaviour
 
     public void SetStage(int stage)
     {
-        if (stage == 1)
-            stageText.text = string.Format("Stage 1:\nMatch Colors");
-        else if (stage == 2)
-            stageText.text = string.Format("Stage 2:\nPinch to Merge Colors");
-        else if (stage == 3)
-            stageText.text = string.Format("Stage 3:\nTap to Match Shape");
+		if (stage == 1)
+			stageText.text = string.Format ("Stage 1:\nMatch Colors");
+		else if (stage == 2) 
+		{
+			stageText.text = string.Format ("Stage 2:\nPinch to Merge Colors");
+			mergeHintImage.gameObject.SetActive (true);
+		}
+		else if (stage == 3) 
+		{
+			stageText.text = string.Format ("Stage 3:\nTap to Match Shape");
+
+
+		}
         else if (stage == 4)
             stageText.text = string.Format("Stage 4:\nMoving Arrows");
         else if (stage == 5)

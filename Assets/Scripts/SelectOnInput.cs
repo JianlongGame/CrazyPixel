@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectOnInput : MonoBehaviour {
 
@@ -22,8 +23,8 @@ public class SelectOnInput : MonoBehaviour {
             for (int i = 0; i < 5; i++) {
                 colors[i] = stages[i].GetComponent<Image>().color;
             }
-            if (reset) {
-                
+			//PlayerPrefs.SetInt("stageNum", 0);
+            if (reset) {    
                 PlayerPrefs.SetInt("stageNum", 0);
             }
             curStage = PlayerPrefs.GetInt("stageNum");
@@ -59,5 +60,10 @@ public class SelectOnInput : MonoBehaviour {
 
 	private void OnDisable(){
 		buttonSelected = false;
+	}
+
+	public void ResetOnClick(){
+		PlayerPrefs.SetInt("stageNum", 0);
+		SceneManager.LoadScene (0);
 	}
 }

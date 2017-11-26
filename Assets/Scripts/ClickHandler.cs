@@ -32,4 +32,6 @@ public class ClickHandler : MonoBehaviour {
 	public void RestartOnClick(int sceneIndex){
 		SceneManager.LoadScene (sceneIndex);
 	}
+		
+			
 }
