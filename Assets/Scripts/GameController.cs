@@ -21,11 +21,11 @@ public class GameController : MonoBehaviour
     public int score;
 
     [SerializeField] private Stat energy;
-    private const float coef_3 = 1.0f;
-	private const float coef_5 = 1.5f;
+    private const float coef_3 = 0.9f;
+	private const float coef_5 = 1.2f;
 
 
-    private int[] scores = { 30, 15, 100, 30 };
+    private int[] scores = { 10, 8, 100, 10};
     public int curStage;
     private void Awake()
 	{
@@ -59,7 +59,7 @@ public class GameController : MonoBehaviour
             return;
 		} else
 		{ 
-			if (curStage == 3&&energy.CurrentVal>95) 
+			if (curStage == 3&&energy.CurrentVal>99) 
 			{
 				PlayerPrefs.SetInt ("stageNum", ind + 1);
 				PassGame ();
@@ -94,6 +94,8 @@ public class GameController : MonoBehaviour
         lives = 2;
         time = 0.0f;
         score = 0;
+		if(curStage == 5)
+		energy.CurrentVal = 0;
     }
 
     public void loseOneLife()
@@ -119,7 +121,7 @@ public class GameController : MonoBehaviour
     public void rightShape()
 	{
 		//checkShape = true;
-		energy.CurrentVal += 10;
+		energy.CurrentVal += 13;
 	}
 
     // Player has died
