@@ -70,17 +70,14 @@ public class GroundTrans : MonoBehaviour {
     int setSpeed(){
     	nowTime = Time.time - startTime;
         int levelCode = 0;
+        levelCode = Random.Range(0, 7);
         if (nowTime >= 10 && nowTime < 30) {
-            levelCode = Random.Range(0, 3);
+            speedup(2);
         } else if (nowTime >= 30 && nowTime < 40) {
-            speedup(10);
-            levelCode = Random.Range(0, 5);
-        } else if (nowTime >= 45) {
             speedup(5);
-            levelCode = Random.Range(0, 7);
+        } else if (nowTime >= 45) {
+            speedup(10);
         }
-
-        
         return levelCode;
     }
 
@@ -97,9 +94,9 @@ public class GroundTrans : MonoBehaviour {
         } else if (levelCode >= 1 && levelCode <= 2) {
             spwanObstacle(shape,2);
         } else if (levelCode >= 3 && levelCode <= 4) {
-            spwanObstacle(shape,3);
-        } else if (levelCode >= 5) {
             mergeObstacle(shape);
+        } else if (levelCode >= 5) {
+            spwanObstacle(shape,3);
         }
     }
 
