@@ -49,7 +49,7 @@ public class CountDown : MonoBehaviour
 		}
 		else if (stage == 3) 
 		{
-			stageText.text = string.Format ("Stage 3:\nTap to Match Shape");
+			stageText.text = string.Format ("Stage 3:\nTap to Match Shape. Fill the danger bar!");
 
 
 		}

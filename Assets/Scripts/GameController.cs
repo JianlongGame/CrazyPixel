@@ -22,10 +22,10 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Stat energy;
     private const float coef_3 = 0.9f;
-	private const float coef_5 = 1.2f;
+	private const float coef_5 = 1.5f;
 
 
-    private int[] scores = { 10, 8, 100, 10};
+    private int[] scores = { 10, 10, 100, 10};
     public int curStage;
     private void Awake()
 	{
@@ -121,7 +121,7 @@ public class GameController : MonoBehaviour
     public void rightShape()
 	{
 		//checkShape = true;
-		energy.CurrentVal += 13;
+		energy.CurrentVal += 10;
 	}
 
     // Player has died
