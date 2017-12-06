@@ -46,8 +46,8 @@ public class GroundTrans : MonoBehaviour {
     }
 
     void stageChoice(int levelCode){
-    	if(LoadSceneOnClick.stageNum!=5 && levelCode >=5){
-    		levelCode = Random.Range(0, 5);
+    	if(LoadSceneOnClick.stageNum!=5 && levelCode < 2){
+    		levelCode = Random.Range(2, 7); //no merge obstacles
     	}
     	switch(LoadSceneOnClick.stageNum){
     		case 1 : //matchColor
@@ -69,14 +69,13 @@ public class GroundTrans : MonoBehaviour {
 
     int setSpeed(){
     	nowTime = Time.time - startTime;
-        int levelCode = 0;
-        levelCode = Random.Range(0, 7);
+        int levelCode = Random.Range(0, 7);
         if (nowTime >= 10 && nowTime < 30) {
-            speedup(2);
-        } else if (nowTime >= 30 && nowTime < 40) {
-            speedup(5);
-        } else if (nowTime >= 45) {
             speedup(10);
+        } else if (nowTime >= 30 && nowTime < 40) {
+            speedup(7);
+        } else if (nowTime >= 45) {
+            speedup(5);
         }
         return levelCode;
     }
@@ -88,13 +87,13 @@ public class GroundTrans : MonoBehaviour {
         }
     }
 
-    void obsNum(int shape, int levelCode){
-    	if (levelCode == 0) {
+    void obsNum(int shape, int levelCode){                 //0-1: merge obstacles
+    	if (levelCode >= 0 && levelCode <=1) {             //2: only one obstacle
+            mergeObstacle(shape);                          //3-4: two obstacles
+        } else if (levelCode == 2) {                       //5-6: three obstacles
             spwanObstacle(shape,1);
-        } else if (levelCode >= 1 && levelCode <= 2) {
-            spwanObstacle(shape,2);
         } else if (levelCode >= 3 && levelCode <= 4) {
-            mergeObstacle(shape);
+            spwanObstacle(shape,2);
         } else if (levelCode >= 5) {
             spwanObstacle(shape,3);
         }
